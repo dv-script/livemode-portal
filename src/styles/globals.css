@@ -25,3 +25,18 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.user-button::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  left: 0;
+  bottom: 0;
+  transition: width 0.1s;
+  background-color: #10b981; /* This is Tailwind's green-500. Replace with your theme color as needed. */
+}
+
+.user-button:hover::after {
+  width: 100%;
+}
