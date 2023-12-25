@@ -92,7 +92,7 @@ export async function RequestAnAccountAction(_prevState: State, formData: FormDa
   } = validatedFields.data;
 
   try {
-    await sql`INSERT INTO "request-an-account" ("email", "company", "first-name", "last-name", "country", "state", "city", "address", "phone-number", "b2b-portal", "photo-database", "commentary-live-system", "customer-service-tool", "match-analysis-hub", "media-portal") VALUES (${email}, ${company}, ${firstName}, ${lastName}, ${country}, ${state}, ${city}, ${address}, ${phoneNumber}, ${b2bPortal}, ${photoDatabase}, ${commentaryLiveSystem}, ${customerServiceTool}, ${matchAnalysisHub}, ${mediaPortal})`;
+    await sql`INSERT INTO request_an_account ("email", "company", "first-name", "last-name", "country", "state", "city", "address", "phone-number", "b2b-portal", "photo-database", "commentary-live-system", "customer-service-tool", "match-analysis-hub", "media-portal") VALUES (${email}, ${company}, ${firstName}, ${lastName}, ${country}, ${state}, ${city}, ${address}, ${phoneNumber}, ${b2bPortal}, ${photoDatabase}, ${commentaryLiveSystem}, ${customerServiceTool}, ${matchAnalysisHub}, ${mediaPortal})`;
   } catch (err) {
     console.log(err);
   }
