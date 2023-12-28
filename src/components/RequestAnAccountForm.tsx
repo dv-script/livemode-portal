@@ -1,5 +1,5 @@
 "use client";
-import { RequestAnAccountAction } from "@/actions/RequestAnAccountAction";
+import { requestAnAccount } from "@/actions/requestAnAccount";
 import { useFormState } from "react-dom";
 import { useState } from "react";
 import Link from "next/link";
@@ -22,8 +22,8 @@ export function RequestAnAccountForm() {
 	const cities = City.getCitiesOfState(selectedCountry, selectedState);
 
 	const initialState = { message: null, errors: {} }
-	// @ts-ignore
-	const [state, dispatch] = useFormState(RequestAnAccountAction, initialState);
+	//@ts-ignore
+	const [state, dispatch] = useFormState(requestAnAccount, initialState);
 
 	return (
 		<form action={dispatch} className="z-10 max-w-3xl w-full p-8 my-8 mx-4 bg-white text-gray-800 border border-gray-200 rounded-lg flex flex-col gap-6">
