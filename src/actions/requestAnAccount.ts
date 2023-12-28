@@ -40,10 +40,10 @@ export type State = {
     matchAnalysisHub?: string[];
     mediaPortal?: string[];
   };
-  message?: string | null;
+
 };
 
-export async function RequestAnAccountAction(_prevState: State, formData: FormData) {
+export async function requestAnAccount(_prevState: State, formData: FormData) {
   unstable_noStore();
 
   const validatedFields = RequestAnAccountFormSchema.safeParse({
