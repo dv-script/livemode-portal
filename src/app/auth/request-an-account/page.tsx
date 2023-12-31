@@ -8,10 +8,7 @@ export default function RequestAnAccount() {
             <Image
                 src={backgroundImage}
                 alt="Background"
-                layout="fill"
-                objectFit="cover"
-                objectPosition="center"
-                className="z-0 absolute h-full w-full"
+                className="z-0 absolute h-full w-full object-cover"
             />
             <RequestAnAccountForm />
         </div>
