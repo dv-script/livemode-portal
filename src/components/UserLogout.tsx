@@ -4,7 +4,7 @@ import { PiSignOut } from 'react-icons/pi';
 export function UserLogout() {
     return (
         <form action={logout} className="h-full">
-            <button type="submit" className="flex items-center gap-2 h-full dark:text-zinc-100 relative cursor-pointer hover:text-green-500 user-button">
+            <button type="submit" className="flex items-center gap-2 h-full text-zinc-100 relative cursor-pointer hover:text-green-500 user-button">
                 <PiSignOut size={26} />
                 <span className="whitespace-nowrap text-sm leading-7 hidden md:block">Sign Out</span>
             </button>
