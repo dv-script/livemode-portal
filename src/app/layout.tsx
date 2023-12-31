@@ -11,8 +11,8 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: 'Livemode Portal Booking',
-  description: 'Livemode Portal Booking',
+  title: 'Livemode Portal',
+  description: 'Livemode Portal'
 }
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
       <Head>
         <link rel="icon" href="./favicon.png" />
       </Head>
-      <body className={poppins.className}>
+      <body className={`${poppins.className} dark:bg-zinc-700 bg-zinc-200`}>
         <div className="flex flex-col min-h-screen" >
           <Header />
           <main className="flex-1">
