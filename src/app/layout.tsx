@@ -25,7 +25,7 @@ export default function RootLayout({
       <Head>
         <link rel="icon" href="./favicon.png" />
       </Head>
-      <body className={`${poppins.className} dark:bg-zinc-700 bg-zinc-200`}>
+      <body className={`${poppins.className} dark:bg-zinc-900 bg-zinc-100`}>
         <div className="flex flex-col min-h-screen" >
           <Header />
           <main className="flex-1">
