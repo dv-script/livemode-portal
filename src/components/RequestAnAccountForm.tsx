@@ -26,7 +26,7 @@ export function RequestAnAccountForm() {
 	const [state, dispatch] = useFormState(requestAnAccount, initialState);
 
 	return (
-		<form action={dispatch} className="z-10 max-w-3xl w-full p-8 my-8 mx-4 bg-white text-gray-800 border border-gray-200 rounded-lg flex flex-col gap-6">
+		<form action={dispatch} className="max-w-3xl w-full p-8 my-8 mx-4 bg-white text-gray-800 border border-gray-200 rounded-lg flex flex-col gap-6">
 			<h1 className="text-2xl font-semibold">Request an account</h1>
 			<p className="text-sm text-gray-600">
 				Fill out the form below to request an account.

@@ -7,7 +7,7 @@ export function LoginForm() {
   const [state, dispatch] = useFormState(authenticateUser, undefined);
 
   return (
-    <form action={dispatch} className="z-10 max-w-lg p-8 m-4 bg-white text-gray-800 border border-gray-200 rounded-lg flex flex-col justify-center items-center gap-8 md:p-4 md:gap-4">
+    <form action={dispatch} className="max-w-lg p-8 m-4 bg-white text-gray-800 border border-gray-200 rounded-lg flex flex-col justify-center items-center gap-8 md:p-4 md:gap-4">
       <h1 className="text-[1.25rem] font-semibold">Livemode Single-Sign-On Portal</h1>
       <p className="text-sm">
         This is the general log-in page for your Bundesliga content. After your

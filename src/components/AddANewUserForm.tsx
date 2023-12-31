@@ -19,7 +19,7 @@ export function AddANewUserForm() {
 
 
     return (
-        <form action={dispatch} className="z-10 max-w-3xl w-full p-8 my-8 mx-4 bg-white text-gray-800 border border-gray-200 rounded-lg flex flex-col gap-6">
+        <form action={dispatch} className="max-w-3xl w-full p-8 my-8 mx-4 bg-white text-gray-800 border border-gray-200 rounded-lg flex flex-col gap-6">
             <div className="relative flex items-center justify-center w-full">
                 <Link href="/admin" className="absolute left-0 rounded-full p-2 transition-colors bg-gray-100 hover:bg-gray-300">
                     <PiCaretLeft />
