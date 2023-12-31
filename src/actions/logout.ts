@@ -2,9 +2,8 @@
 import { signOut } from "@/app/auth/providers";
 
 export async function logout() {
-    try {
-        await signOut() 
-    } catch (error) {
-        console.log(error);
-    }
+    await signOut({
+        redirect: true,
+        redirectTo: '/',
+    })
 }
