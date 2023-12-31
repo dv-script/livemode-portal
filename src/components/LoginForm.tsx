@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useFormState } from "react-dom";
 import { authenticateUser } from '@/actions/authenticateUser';
 
-export async function LoginForm() {
+export function LoginForm() {
   const [state, dispatch] = useFormState(authenticateUser, undefined);
 
   return (
@@ -29,8 +29,8 @@ export async function LoginForm() {
       <button className="w-full p-2 bg-green-500 text-white rounded-sm transition-opacity duration-200 hover:opacity-80">Sign in</button>
 
       <div className="w-full flex flex-col gap-1 items-center">
-        <Link href="/forgot-your-password"><span className="text-sm text-gray-500 text-center hover:text-gray-800 hover:underline">Forgot your password?</span></Link>
-        <Link href="/request-an-account"><span className="text-sm text-gray-500 text-center hover:text-gray-800 hover:underline">Request an account</span></Link>
+        <Link href="./forgot-your-password"><span className="text-sm text-gray-500 text-center hover:text-gray-800 hover:underline">Forgot your password?</span></Link>
+        <Link href="./request-an-account"><span className="text-sm text-gray-500 text-center hover:text-gray-800 hover:underline">Request an account</span></Link>
       </div>
 
     </form>
