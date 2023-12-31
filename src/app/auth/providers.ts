@@ -4,7 +4,6 @@ import { getUserByEmail } from "@/actions/getUserByEmail";
 import bcrypt from "bcrypt";
 import { z } from 'zod';
 import NextAuth from "next-auth";
-import { userAgent } from "next/server";
 
 const providers = {
   ...authConfig,
@@ -12,8 +11,8 @@ const providers = {
     Credentials({
       async authorize(credentials) {
         const parsedCredentials = z.object({
-          email: z.string().email('Insira um e-mail válido'),
-          password: z.string().min(6, 'A senha deve conter no mínimo 6 caracteres')
+          email: z.string().email('Enter a valid email'),
+          password: z.string().min(6, 'Password has to be at least 6 characters long')
         }).safeParse(credentials)
 
         if (parsedCredentials.success) {
@@ -22,7 +21,7 @@ const providers = {
           const user = await getUserByEmail(email)
           if (!user) return null
 
-          const passwordMatch = password === user.password
+          const passwordMatch = await bcrypt.compare(password, user.password)
           if (passwordMatch) return user
         }
 
