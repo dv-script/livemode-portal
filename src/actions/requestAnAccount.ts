@@ -97,5 +97,5 @@ export async function requestAnAccount(_prevState: State, formData: FormData) {
     console.log(err);
   }
 
-  redirect("/sign-in");
+  redirect("/auth/sign-in");
 }
