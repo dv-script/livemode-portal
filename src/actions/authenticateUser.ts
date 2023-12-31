@@ -8,12 +8,11 @@ export async function authenticateUser(
 ) {
   try {
     await signIn('credentials', Object.fromEntries(formData));
-    redirect('/');
   } catch (error) {
     if ((error as Error).message.includes("CredentialsSignin")) {
       return "CredentialsSignIn";
     }
-
     throw error;
   }
+  redirect('/');
 }
