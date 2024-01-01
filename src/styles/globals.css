@@ -4,6 +4,7 @@
 
 .background {
   background-image: url('../assets/backgroundImage.png');
+  object-fit: cover;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -17,7 +18,7 @@
   left: 0;
   bottom: 0;
   transition: width 0.1s;
-  background-color: #10b981; /* This is Tailwind's green-500. Replace with your theme color as needed. */
+  background-color: #10b981;
 }
 
 .user-button:hover::after {
