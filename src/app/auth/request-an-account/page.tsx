@@ -1,4 +1,4 @@
-import { RequestAnAccountForm } from "@/components/RequestAnAccountForm"
+import { RequestAnAccountForm } from "@/components/request-an-account-form"
 
 export default function RequestAnAccount() {
     return (

@@ -1,5 +1,5 @@
 "use client";
-import { requestAnAccount } from "@/actions/requestAnAccount";
+import { requestAnAccount } from "@/actions/request-an-account";
 import { useFormState } from "react-dom";
 import { useState } from "react";
 import Link from "next/link";

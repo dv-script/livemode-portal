@@ -2,7 +2,7 @@ import React from "react";
 import {Popover, PopoverTrigger, PopoverContent, User, Card, CardBody } from "@nextui-org/react";
 import { LuSettings, LuUserCircle, LuHelpCircle, LuKeyRound } from "react-icons/lu";
 import Link from "next/link";
-import { UserLogout } from "./UserLogout";
+import { UserLogout } from "./user-logout";
 
 interface UserProfileProps {
   image?: string

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Head from "next/head";
 import { Poppins } from "next/font/google";
 import "@/styles/globals.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 import { NextUiProvider } from "@/providers/next-ui";
 
 const poppins = Poppins({

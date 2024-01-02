@@ -3,7 +3,7 @@ import { useFormState } from "react-dom";
 import { useState } from "react";
 import Link from "next/link";
 import { PiCaretLeft, PiPassword } from "react-icons/pi";
-import { addANewUser } from "@/actions/addANewUser";
+import { addANewUser } from "@/actions/add-a-new-user";
 import { createHash } from "@/utils/createHash";
 
 export function AddANewUserForm() {

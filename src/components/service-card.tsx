@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PiQuestionFill } from "react-icons/pi";
-import { PopoverDescriptionService } from "./PopoverDescriptionService";
+import { PopoverDescriptionService } from "./popover-description-service";
 
 interface CardProps {
   title: string
