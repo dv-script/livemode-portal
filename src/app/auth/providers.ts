@@ -1,6 +1,6 @@
 import { authConfig } from "./auth.config";
 import Credentials from "next-auth/providers/credentials";
-import { getUserByEmail } from "@/actions/getUserByEmail";
+import { getUserByEmail } from "@/actions/get-user-by-email";
 import bcrypt from "bcrypt";
 import { z } from 'zod';
 import NextAuth from "next-auth";

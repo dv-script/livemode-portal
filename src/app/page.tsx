@@ -1,4 +1,4 @@
-import { Card } from "@/components/Card";
+import { Card } from "@/components/service-card";
 import { servicesInfoMap } from "@/enum/services";
 
 export default function Home() {

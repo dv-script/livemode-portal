@@ -1,7 +1,7 @@
 "use client"
 import Link from 'next/link';
 import { useFormState } from "react-dom";
-import { authenticateUser } from '@/actions/authenticateUser';
+import { authenticateUser } from '@/actions/authenticate-user';
 
 export function LoginForm() {
   const [state, dispatch] = useFormState(authenticateUser, undefined);
