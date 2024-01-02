@@ -5,12 +5,15 @@ declare module 'next-auth' {
         id: string
         first_name: string
         last_name: string
-        email: string
+        company: string
         roles: string[]
     }
 
     interface Session {
         user: {
+            first_name: string
+            last_name: string
+            company: string
             roles: string[]
         } & DefaultSession['user']
     }
@@ -18,6 +21,9 @@ declare module 'next-auth' {
 
 declare module '@auth/core/jwt' {
     interface JWT {
+        first_name: string
+        last_name: string
+        company: string
         roles: string[]
     }
 }
