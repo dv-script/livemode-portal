@@ -1,12 +1,12 @@
 import { logout } from "@/actions/logout";
-import { PiSignOut } from 'react-icons/pi';
+import { LuLogOut } from "react-icons/lu";
 
 export function UserLogout() {
     return (
-        <form action={logout} className="h-full">
-            <button type="submit" className="flex items-center gap-2 h-full text-zinc-100 relative cursor-pointer hover:text-green-500 user-button">
-                <PiSignOut size={26} />
-                <span className="whitespace-nowrap text-sm leading-7 hidden md:block">Sign Out</span>
+        <form action={logout} className="w-full">
+            <button type="submit" className="w-full flex items-center gap-2 text-left rounded-lg px-4 py-2 transition hover:bg-red-100 hover:text-red-700">
+                <LuLogOut />
+                Sign Out
             </button>
         </form>
     )
