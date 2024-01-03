@@ -18,8 +18,12 @@ export const authConfig = {
         return false;
       }
 
-      if ((isLogIn && isAuthRoutes) || (isAdminRoutes && !isAdmin)) {
+      if (isLogIn && isAuthRoutes) {
         return Response.redirect(new URL("/", nextUrl));
+      }
+
+      if (isAdminRoutes && !isAdmin) {
+        return Response.redirect(new URL("/", nextUrl))
       }
 
       return true;
@@ -27,7 +31,6 @@ export const authConfig = {
     jwt({ token, user }) {
       if (user) {
         token.roles = user.roles;
-        token.email = user.email;
         token.company = user.company;
         token.first_name = user.first_name;
         token.last_name = user.last_name;
@@ -37,7 +40,6 @@ export const authConfig = {
     session({ session, token }) {
       if (token.roles) session.user.roles = token.roles;
       if (token.company) session.user.company = token.company;
-      if (token.email) session.user.email = token.email;
       if (token.first_name) session.user.first_name = token.first_name;
       if (token.last_name) session.user.last_name = token.last_name;
       return session;
