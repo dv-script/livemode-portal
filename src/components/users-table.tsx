@@ -1,7 +1,6 @@
 import { User, Tooltip } from "@nextui-org/react";
 import { getAllUsers } from "@/actions/get-all-users";
-import { LuEye } from "react-icons/lu";
-import { PiPencilSimpleLine } from "react-icons/pi";
+import { EditUserModal } from "@/components/edit-user-modal";
 import { TbTrash } from "react-icons/tb";
 import { formatDate } from "@/utils/formatDate";
 
@@ -10,7 +9,6 @@ interface IUser {
   email: string;
   first_name: string;
   last_name: string;
-  password: string;
   company: string;
   roles: string[];
   created_at: Date;
@@ -19,10 +17,10 @@ interface IUser {
 
 export async function UsersTable() {
   const users = (await getAllUsers()) as IUser[];
-
+  
   return (
     <table>
-      <thead className="whitespace-nowrap text-left text-semibold text-sm font-semibold text-zinc-400 align-bottom">
+      <thead className="sticky top-0 bg-white z-10 whitespace-nowrap text-left text-semibold text-sm font-semibold text-zinc-400 align-bottom">
         <tr>
           <th className="pb-3 text-start min-w-[175px]">USER</th>
           <th className="pb-3 text-start min-w-[175px]">COMPANY</th>
@@ -35,11 +33,12 @@ export async function UsersTable() {
       <tbody>
         {users.map((user) => (
           <tr key={user.id} className="border-b last:border-none">
-            <td className="pr-4">
+            <td className="pr-4 py-2">
               <User
                 avatarProps={{
                   radius: "full",
-                  src: "https://github.com/dv-script.png",
+                  name: user.first_name[0],
+                  color: "primary"
                 }}
                 description={user.email}
                 name={user.first_name + " " + user.last_name}
@@ -47,10 +46,10 @@ export async function UsersTable() {
                 {user.email}
               </User>
             </td>
-            <td className="pr-4">
-              <span>{user.company}</span>
+            <td className="pr-4 py-2">
+              <span className="text-sm">{user.company}</span>
             </td>
-            <td className="pr-4">
+            <td className="pr-4 py-2">
               {user.roles.map((role, index) => (
                 <span
                   key={index}
@@ -60,20 +59,20 @@ export async function UsersTable() {
                 </span>
               ))}
             </td>
-            <td className="pr-4">
-              <span>{formatDate(user.created_at)}</span>
+            <td className="pr-4 py-2">
+              <span className="text-sm">{formatDate(user.created_at)}</span>
             </td>
             <td className={user.updated_at !== null ? 'text-left' : 'text-center'}>
-              <span>
+              <span className="text-sm">
                 {user.updated_at !== null ? formatDate(user.updated_at) : "-"}
               </span>
             </td>
             <td>
               <div className="relative flex items-center gap-2">
-                <Tooltip content="Edit user">
-                  <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                    <PiPencilSimpleLine />
-                  </span>
+                <Tooltip className="bg-zinc-700 text-white b-2 border-zinc-100" content="Edit user">
+                  <div className="flex items-center justify-center">
+                    <EditUserModal user={user} />
+                  </div>
                 </Tooltip>
                 <Tooltip color="danger" content="Delete user">
                   <span className="text-lg text-danger cursor-pointer active:opacity-50">
