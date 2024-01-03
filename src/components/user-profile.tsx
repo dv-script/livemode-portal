@@ -12,7 +12,7 @@ interface UserProfileProps {
   isAdmin: boolean
 }
 
-export function UserProfile({ first_name, last_name, company }: UserProfileProps) {
+export function UserProfile({ first_name, last_name, company, isAdmin }: UserProfileProps) {
   return (
     <Popover showArrow placement="bottom">
       <PopoverTrigger>
@@ -29,10 +29,10 @@ export function UserProfile({ first_name, last_name, company }: UserProfileProps
       <PopoverContent className="p-1">
         <Card shadow="none" className="max-w-[300px] min-w-44 border-none bg-transparent">
           <CardBody className="p-2">
-            <Link href="/admin" className="flex items-center gap-2 text-left rounded-lg px-4 py-2 transition-all hover:bg-blue-100 hover:text-blue-700">
+            {isAdmin && <Link href="/admin" className="flex items-center gap-2 text-left rounded-lg px-4 py-2 transition-all hover:bg-blue-100 hover:text-blue-700">
               <LuKeyRound />
               Admin
-            </Link>
+            </Link>}
             <Link href="/user/edit-profile" className="flex items-center gap-2 text-left rounded-lg px-4 py-2 transition-all hover:bg-blue-100 hover:text-blue-700">
               <LuUserCircle />
               Edit profile
