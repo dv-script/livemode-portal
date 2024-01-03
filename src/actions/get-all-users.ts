@@ -6,7 +6,6 @@ interface IUser {
   email: string
   first_name: string
   last_name: string
-  password: string
   company: string
   roles: string[]
   created_at: Date
@@ -16,7 +15,7 @@ interface IUser {
 export async function getAllUsers() {
   try {
     const { rows } = await sql<IUser>`
-            SELECT * FROM users
+            SELECT id, email, first_name, last_name, company, roles, created_at, updated_at FROM users
         `;
     return rows;
   } catch (error) {
