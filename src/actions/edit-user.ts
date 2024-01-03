@@ -7,12 +7,8 @@ const EditUserFormSchema = z.object({
     company: z.string(),
     firstName: z.string().min(2, { message: 'First name has to be at least 2 characters long' }),
     lastName: z.string().min(2, { message: 'Last name has to be at least 2 characters long' }),
-    b2bPortal: z.string().nullish(),
-    photoDatabase: z.string().nullish(),
-    commentaryLiveSystem: z.string().nullish(),
-    customerServiceTool: z.string().nullish(),
-    matchAnalysisHub: z.string().nullish(),
-    mediaPortal: z.string().nullish(),
+    roles: z.array(z.string()),
+    updatedAt: z.date()
 })
 
 export type State = {
@@ -21,37 +17,56 @@ export type State = {
         company?: string[]
         firstName?: string[]
         lastName?: string[]
-        b2bPortal?: string[]
-        photoDatabase?: string[]
-        commentaryLiveSystem?: string[]
-        customerServiceTool?: string[]
-        matchAnalysisHub?: string[]
-        mediaPortal?: string[]
+        roles?: string[] 
     };
 };
 
 export async function editUser(prevState: State, formData: FormData) {
+    const allRoles = formData.getAll("roles");
+    const checkedRoles = allRoles.filter((role) => role !== "off");
+
     const validatedFields = EditUserFormSchema.safeParse({
         email: formData.get("email"),
         company: formData.get("company"),
         firstName: formData.get("firstName"),
         lastName: formData.get("lastName"),
-        b2bPortal: formData.get("b2bPortal"),
-        photoDatabase: formData.get("photoDatabase"),
-        commentaryLiveSystem: formData.get("commentaryLiveSystem"),
-        customerServiceTool: formData.get("customerServiceTool"),
-        matchAnalysisHub: formData.get("matchAnalysisHub"),
-        mediaPortal: formData.get("mediaPortal"),
+        roles: checkedRoles,
+        updatedAt: new Date,
     });
 
     if (!validatedFields.success) {
-        return { errors: validatedFields.error.flatten() };
+        console.log(validatedFields.error.flatten().fieldErrors);
+
+        return {
+            errors: validatedFields.error.flatten().fieldErrors,
+            message: "Please, fill in the fields correctly.",
+        };
     }
 
-    const { email, company, firstName, lastName, b2bPortal, photoDatabase, commentaryLiveSystem, customerServiceTool, matchAnalysisHub, mediaPortal } = validatedFields.data;
+    const {
+        email,
+        company,
+        firstName,
+        lastName,
+        roles,
+        updatedAt
+    } = validatedFields.data;
 
     try {
-        await sql`UPDATE users SET email = ${email}, company = ${company}, first_name = ${firstName}, last_name = ${lastName}, b2b_portal = ${b2bPortal}, photo_database = ${photoDatabase}, commentary_live_system = ${commentaryLiveSystem}, customer_service_tool = ${customerServiceTool}, match_analysis_hub = ${matchAnalysisHub}, media_portal = ${mediaPortal} WHERE email = ${email}`
+        await sql`
+            UPDATE
+                users
+            SET 
+                email = ${email}, 
+                company = ${company}, 
+                first_name = ${firstName},
+                last_name = ${lastName},
+                roles = ${roles as any},
+                updated_at = ${updatedAt.toISOString()}
+            WHERE
+                email = ${email}
+        `
+        console.log('Done')
 
         return { message : 'User updated successfully'}
     } catch (error) {
