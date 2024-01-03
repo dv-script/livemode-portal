@@ -1,19 +1,18 @@
 "use server";
 import { z } from "zod";
-import { unstable_noStore } from "next/cache";
 import { sql } from "@vercel/postgres";
 import { redirect } from "next/navigation";
 
 const RequestAnAccountFormSchema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
-  company: z.string(),
+  company: z.string().refine(value => !!value, { message: 'Company is required'}),
   firstName: z.string().min(2, { message: 'First name has to be at least 2 characters long' }),
   lastName: z.string().min(2, { message: 'Last name has to be at least 2 characters long' }),
   country: z.string(),
   state: z.string(),
   city: z.string(),
-  address: z.string(),
-  phoneNumber: z.string(),
+  address: z.string().refine(value => !!value, { message: 'Address is required'}),
+  phoneNumber: z.string().refine(value => !!value, { message: 'Phone number is required'}),
   b2bPortal: z.string().nullish(),
   photoDatabase: z.string().nullish(),
   commentaryLiveSystem: z.string().nullish(),
@@ -40,11 +39,9 @@ export type State = {
     matchAnalysisHub?: string[];
     mediaPortal?: string[];
   };
-
 };
 
-export async function requestAnAccount(_prevState: State, formData: FormData) {
-  unstable_noStore();
+export async function requestAnAccount(prevState: State, formData: FormData) {
 
   const validatedFields = RequestAnAccountFormSchema.safeParse({
     email: formData.get("email"),
