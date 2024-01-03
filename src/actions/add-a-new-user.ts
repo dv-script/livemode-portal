@@ -3,6 +3,8 @@ import { z } from "zod";
 import { sql } from "@vercel/postgres";
 import { redirect } from "next/navigation";
 import bcrypt from 'bcrypt';
+import { sendEmail } from "./send-email";
+import { EmailTemplate } from "@/components/email-template";
 
 const addANewUserSchema = z.object({
     email: z.string().email({ message: 'Invalid email address' }),
@@ -59,7 +61,7 @@ export async function addANewUser(_prevState: State, formData: FormData) {
     } = validatedFields.data;
 
     const hashPassword = await bcrypt.hash(password, 10);
-    
+
     try {
         await sql`INSERT INTO users (
         first_name,
@@ -77,7 +79,15 @@ export async function addANewUser(_prevState: State, formData: FormData) {
         ${hashPassword},
         ${roles as any},
         ${createdAt.toISOString()}
-    )`} catch (err) {
+    )`
+
+        await sendEmail({
+            to: Array(email),
+            subject: "Dive Into Your Livemode Experience – Account Activated.",
+            react: EmailTemplate({ firstName: firstName, lastName: lastName, email: email, password: password }) as React.ReactElement,
+        });
+
+    } catch (err) {
         console.log(err);
     }
 
