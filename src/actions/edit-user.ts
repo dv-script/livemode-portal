@@ -1,5 +1,6 @@
 'use server';
 import { sql } from "@vercel/postgres";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 const EditUserFormSchema = z.object({
@@ -8,7 +9,7 @@ const EditUserFormSchema = z.object({
     firstName: z.string().min(2, { message: 'First name has to be at least 2 characters long' }),
     lastName: z.string().min(2, { message: 'Last name has to be at least 2 characters long' }),
     roles: z.array(z.string()),
-    updatedAt: z.date()
+    updatedAt: z.string()
 })
 
 export type State = {
@@ -31,8 +32,8 @@ export async function editUser(prevState: State, formData: FormData) {
         firstName: formData.get("firstName"),
         lastName: formData.get("lastName"),
         roles: checkedRoles,
-        updatedAt: new Date,
-    });
+        updatedAt: new Date().toISOString(),
+    });   
 
     if (!validatedFields.success) {
         console.log(validatedFields.error.flatten().fieldErrors);
@@ -62,12 +63,11 @@ export async function editUser(prevState: State, formData: FormData) {
                 first_name = ${firstName},
                 last_name = ${lastName},
                 roles = ${roles as any},
-                updated_at = ${updatedAt.toISOString()}
+                updated_at = ${updatedAt}
             WHERE
                 email = ${email}
         `
-        console.log('Done')
-
+        revalidatePath('/admin');
         return { message : 'User updated successfully'}
     } catch (error) {
         console.error(error);
