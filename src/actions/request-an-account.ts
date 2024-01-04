@@ -1,47 +1,49 @@
 "use server";
 import { z } from "zod";
 import { sql } from "@vercel/postgres";
-import { redirect } from "next/navigation";
+import { unstable_noStore as noStore } from 'next/cache';
 
 const RequestAnAccountFormSchema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
   company: z.string().refine(value => !!value, { message: 'Company is required'}),
   firstName: z.string().min(2, { message: 'First name has to be at least 2 characters long' }),
   lastName: z.string().min(2, { message: 'Last name has to be at least 2 characters long' }),
-  country: z.string(),
-  state: z.string(),
-  city: z.string(),
+  country: z.string().refine(value => !!value, { message: 'Country is required'}),
+  state: z.string().refine(value => !!value, { message: 'State is required'}),
+  city: z.string().refine(value => !!value, { message: 'City is required'}),
   address: z.string().refine(value => !!value, { message: 'Address is required'}),
   phoneNumber: z.string().refine(value => !!value, { message: 'Phone number is required'}),
   b2bPortal: z.string().nullish(),
   photoDatabase: z.string().nullish(),
   commentaryLiveSystem: z.string().nullish(),
-  customerServiceTool: z.string().nullish(),
+  costumerServiceTool: z.string().nullish(),
   matchAnalysisHub: z.string().nullish(),
   mediaPortal: z.string().nullish(),
 })
 
 export type State = {
   errors?: {
-    email?: string[];
-    company?: string[];
-    firstName?: string[];
-    lastName?: string[];
-    country?: string[];
-    state?: string[];
-    city?: string[];
-    address?: string[];
-    phoneNumber?: string[];
-    b2bPortal?: string[];
-    photoDatabase?: string[];
-    commentaryLiveSystem?: string[];
-    customerServiceTool?: string[];
-    matchAnalysisHub?: string[];
-    mediaPortal?: string[];
+    email?: string[]
+    company?: string[]
+    firstName?: string[]
+    lastName?: string[]
+    country?: string[]
+    state?: string[]
+    city?: string[]
+    address?: string[]
+    phoneNumber?: string[]
+    b2bPortal?: string[]
+    photoDatabase?: string[]
+    commentaryLiveSystem?: string[]
+    costumerServiceTool?: string[]
+    matchAnalysisHub?: string[]
+    mediaPortal?: string[]
   };
+  message: string
 };
 
 export async function requestAnAccount(prevState: State, formData: FormData) {
+  noStore()
 
   const validatedFields = RequestAnAccountFormSchema.safeParse({
     email: formData.get("email"),
@@ -56,7 +58,7 @@ export async function requestAnAccount(prevState: State, formData: FormData) {
     b2bPortal: formData.get("b2bPortal"),
     photoDatabase: formData.get("photoDatabase"),
     commentaryLiveSystem: formData.get("commentaryLiveSystem"),
-    customerServiceTool: formData.get("customerServiceTool"),
+    costumerServiceTool: formData.get("costumerServiceTool"),
     matchAnalysisHub: formData.get("matchAnalysisHub"),
     mediaPortal: formData.get("mediaPortal"),
   });
@@ -83,16 +85,52 @@ export async function requestAnAccount(prevState: State, formData: FormData) {
     b2bPortal,
     photoDatabase,
     commentaryLiveSystem,
-    customerServiceTool,
+    costumerServiceTool,
     matchAnalysisHub,
     mediaPortal,
   } = validatedFields.data;
 
   try {
-    await sql`INSERT INTO request_an_account ("email", "company", "first-name", "last-name", "country", "state", "city", "address", "phone-number", "b2b-portal", "photo-database", "commentary-live-system", "customer-service-tool", "match-analysis-hub", "media-portal") VALUES (${email}, ${company}, ${firstName}, ${lastName}, ${country}, ${state}, ${city}, ${address}, ${phoneNumber}, ${b2bPortal}, ${photoDatabase}, ${commentaryLiveSystem}, ${customerServiceTool}, ${matchAnalysisHub}, ${mediaPortal})`;
-  } catch (err) {
-    console.log(err);
+    await sql`INSERT INTO 
+      request_an_account (
+        first_name,
+        last_name,
+        email,
+        company,
+        country,
+        state,
+        city,
+        address,
+        phone_number,
+        b2b_portal,
+        photo_database,
+        commentary_live_system,
+        costumer_service_tool,
+        match_analysis_hub,
+        media_portal
+      ) VALUES (
+        ${firstName},
+        ${lastName},
+        ${email},
+        ${company},
+        ${country},
+        ${state},
+        ${city},
+        ${address},
+        ${phoneNumber},
+        ${b2bPortal},
+        ${photoDatabase},
+        ${commentaryLiveSystem},
+        ${costumerServiceTool},
+        ${matchAnalysisHub},
+        ${mediaPortal}
+      )`;
+    
+    return { message: "Your request has been sent successfully.", success: true };
+  } catch (error) {
+    if (error instanceof Error) {
+      return { message: 'Failed to request an account', success: false };
+    }
+    throw error;
   }
-
-  redirect("/auth/sign-in");
 }
