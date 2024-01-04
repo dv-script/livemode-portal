@@ -5,6 +5,7 @@ import "@/styles/globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { NextUiProvider } from "@/providers/next-ui";
+import { Toaster } from "react-hot-toast"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ export default function RootLayout({
       </Head>
       <body className={`${poppins.className}`}>
         <NextUiProvider>
+          <Toaster />
           <div className="flex flex-col min-h-screen">
             <Header />
             <main className="flex-1">{children}</main>
