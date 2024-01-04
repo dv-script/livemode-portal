@@ -2,9 +2,11 @@
 import Link from 'next/link';
 import { useFormState } from "react-dom";
 import { authenticateUser } from '@/actions/authenticate-user';
+import { FormError } from './form-error';
 
 export function LoginForm() {
-  const [state, dispatch] = useFormState(authenticateUser, undefined);
+  const initialState = { message: '', errors: {} };
+  const [state, dispatch] = useFormState(authenticateUser, initialState);
 
   return (
     <form action={dispatch} className="max-w-lg p-8 m-4 bg-white text-gray-800 border border-gray-200 rounded-lg flex flex-col justify-center items-center gap-8 md:p-4 md:gap-4">
@@ -18,14 +20,21 @@ export function LoginForm() {
         <div className="flex flex-col gap-2">
           <label className="text-sm">E-mail</label>
           <input name='email' type="email" placeholder="E-mail address" className="w-full p-2 border border-gray-300 bg-gray-100 text-gray-800 rounded-sm focus:outline-none" />
+          {state?.errors?.email?.map(error => (
+            <span key={error} aria-live="polite" className="text-red-500">{error}</span>
+          ))}
         </div>
 
         <div className="flex flex-col gap-2">
           <label className="text-sm">Password</label>
           <input name='password' type="password" placeholder="Password" className="w-full p-2 border border-gray-300 bg-gray-100 text-gray-800 rounded-sm focus:outline-none" />
+          {state?.errors?.password?.map(error => (
+            <span key={error} aria-live="polite" className="text-red-500">{error}</span>
+          ))}
+
         </div>
       </div>
-
+      {state?.message && <FormError errorMessage={state.message} />}
       <button className="w-full p-2 bg-green-500 text-white rounded-sm transition-opacity duration-200 hover:opacity-80">Sign in</button>
 
       <div className="w-full flex flex-col gap-1 items-center">
