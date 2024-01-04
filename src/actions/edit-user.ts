@@ -5,10 +5,10 @@ import { z } from "zod";
 
 const EditUserFormSchema = z.object({
     email: z.string().email({ message: 'Invalid email address' }),
-    company: z.string(),
+    company: z.string().refine(value => !!value, { message: 'Company is required' }),
     firstName: z.string().min(2, { message: 'First name has to be at least 2 characters long' }),
     lastName: z.string().min(2, { message: 'Last name has to be at least 2 characters long' }),
-    roles: z.array(z.string()),
+    roles: z.array(z.string()).min(1, "At least one role must be selected."),
     updatedAt: z.string()
 })
 
@@ -19,7 +19,9 @@ export type State = {
         firstName?: string[]
         lastName?: string[]
         roles?: string[] 
-    };
+    }
+    message: string
+    success?: boolean
 };
 
 export async function editUser(prevState: State, formData: FormData) {
@@ -68,8 +70,11 @@ export async function editUser(prevState: State, formData: FormData) {
                 email = ${email}
         `
         revalidatePath('/admin');
-        return { message : 'User updated successfully'}
+        return { message: 'User successfully updated', success: true }
     } catch (error) {
-        console.error(error);
+        if (error instanceof Error) {
+            return { message: 'Failed to update user', success: false };
+        }
+        throw error;
     }
 }
