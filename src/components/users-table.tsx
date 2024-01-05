@@ -3,6 +3,7 @@ import { getAllUsers } from "@/actions/get-all-users";
 import { EditUserModal } from "@/components/edit-user-modal";
 import { TbTrash } from "react-icons/tb";
 import { formatDate } from "@/utils/formatDate";
+import { DeleteUserModal } from "./delete-user-modal";
 
 interface IUser {
   id: string;
@@ -76,7 +77,7 @@ export async function UsersTable() {
                 </Tooltip>
                 <Tooltip color="danger" content="Delete user">
                   <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                    <TbTrash />
+                    <DeleteUserModal user={user} />
                   </span>
                 </Tooltip>
               </div>
