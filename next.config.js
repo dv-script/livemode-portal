@@ -1,8 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['access.bundesliga.com'],
-  },
+    remotePatterns: [{
+      protocol: 'https',
+      hostname: 'access.bundesliga.com',
+      port: ''
+    }, {
+      protocol: 'https',
+      hostname: 'frontendapiapp.blob.core.windows.net',
+      port: ''
+    }]
+  }
 }
 
 module.exports = nextConfig
