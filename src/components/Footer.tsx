@@ -5,10 +5,10 @@ export function Footer() {
         <footer className="w-full bg-black">
             <div className="max-w-[1300px] mx-auto py-4 px-3 text-center">
                 <div className="flex justify-center flex-wrap gap-2 md:gap-4">
-                    <FooterItem href="#">Legal information</FooterItem>
-                    <FooterItem href="#">Privacy policy and cookie policy</FooterItem>
-                    <FooterItem href="#">Terms of Use</FooterItem>
-                    <FooterItem href="#">Press</FooterItem>
+                    <FooterItem href="/legal-information">Legal information</FooterItem>
+                    <FooterItem href="/privacy-policy-and-cookie-policy">Privacy policy and cookie policy</FooterItem>
+                    <FooterItem href="terms-of-use">Terms of Use</FooterItem>
+                    <FooterItem href="/press">Press</FooterItem>
                 </div>
                 <span className="text-sm text-gray-500 mt-4 block">
                     © 2023 Livemode
