@@ -4,6 +4,7 @@ import { IFetchTeamResponse } from "@/types/IFetchTeamResponse";
 import { IMatch } from "@/types/IMatch";
 import { ITeamDetails } from "@/types/ITeamDetails";
 import { formatDateAbbreviation } from "@/utils/formatDateAbbreviation";
+import { Tooltip } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -42,35 +43,24 @@ export async function MatchesByRound({ allMatches }: IMatchesByRoundProps) {
   }));
 
   return (
-    <>
+    <div className="flex flex-wrap gap-2 md:flex-col md:w-full">
       {detailedMatches.map((match: IMatch) => {
         const isLive = match.realtime;
         const notStarted = match.gameTime === "Não iniciado";
 
         return (
           <Link
-            href={
-              notStarted ? `/commentary-live-system/match/${match.id}` : ""
-            }
+            href={notStarted ? `/commentary-live-system/match/${match.id}` : ""}
             key={match.id}
-            className="mx-auto flex-1 flex flex-col flex-nowrap gap-4 py-6 px-4 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out"
+            className="mx-auto w-full flex flex-col flex-nowrap gap-4 py-6 px-4 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out"
           >
-            <div className="flex gap-2 items-center">
+            <div className="flex flex-col items-center justify-center">
               <span className="text-sm whitespace-nowrap">
                 {formatDateAbbreviation(new Date(match.isoDate))}
               </span>
-              <span className="text-sm">-</span>
-              <span className="text-sm whitespace-nowrap">
-                {match.stadium}
-              </span>
-              {isLive && (
-                <div className="flex flex-row gap-1 text-sm w-fit items-center bg-red-600 text-white rounded-xl px-2 py-1">
-                  <span className="rounded-full bg-white w-2 h-2"></span>
-                  <span>Ao vivo</span>
-                </div>
-              )}
+              <span className="text-sm whitespace-nowrap text-zinc-500">{match.stadium}</span>
             </div>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col gap-1 items-center">
               <div className="flex flex-row gap-4 justify-center items-center font-bold text-xl text-zinc-600">
                 <div className="flex items-center gap-2">
                   <Image
@@ -79,9 +69,15 @@ export async function MatchesByRound({ allMatches }: IMatchesByRoundProps) {
                     width={30}
                     height={30}
                   />
-                  <span className="font-semibold text-zinc-400">
-                    {match.homeTeamDetails?.initials}
-                  </span>
+                  <Tooltip
+                    content={match.homeTeamDetails?.name}
+                    color="default"
+                    radius="sm"
+                  >
+                    <span className="font-semibold text-zinc-400">
+                      {match.homeTeamDetails?.initials}
+                    </span>
+                  </Tooltip>
                 </div>
                 {!notStarted && (
                   <div className="flex items-center gap-1">
@@ -91,9 +87,15 @@ export async function MatchesByRound({ allMatches }: IMatchesByRoundProps) {
                   </div>
                 )}
                 <div className="flex items-center gap-2">
-                  <span className="font-semibold text-zinc-400">
-                    {match.awayTeamDetails?.initials}
-                  </span>
+                  <Tooltip
+                    content={match.awayTeamDetails?.name}
+                    color="default"
+                    radius="sm"
+                  >
+                    <span className="font-semibold text-zinc-400">
+                      {match.awayTeamDetails?.initials}
+                    </span>
+                  </Tooltip>
                   <Image
                     src={match.awayTeamDetails?.urlLogo || ""}
                     alt={`Logo ${match.awayTeamDetails?.name}`}
@@ -102,7 +104,14 @@ export async function MatchesByRound({ allMatches }: IMatchesByRoundProps) {
                   />
                 </div>
               </div>
-              <p className="text-xs">{match.gameTime}</p>
+              {isLive ? (
+                <div className="flex flex-row gap-1 text-sm w-fit items-center bg-red-600 text-white rounded-xl px-2 py-1">
+                  <span className="rounded-full bg-white w-2 h-2"></span>
+                  <span>Live</span>
+                </div>
+              ) : (
+                <p className="text-sm">{match.gameTime}</p>
+              )}
             </div>
             <div className="flex flex-row gap-2 justify-center items-center">
               {!notStarted ? (
@@ -118,6 +127,6 @@ export async function MatchesByRound({ allMatches }: IMatchesByRoundProps) {
           </Link>
         );
       })}
-    </>
+    </div>
   );
 }
