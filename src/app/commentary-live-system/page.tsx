@@ -3,7 +3,7 @@ import { IFetchMatchesResponse } from "@/types/IFetchMatchesResponse";
 import { MatchesByRound } from "@/components/matches-by-round";
 import { PaginationByRound } from "@/components/pagination-by-round";
 import { StandingsTable } from "@/components/standings-table";
-
+import { TopScorersTable } from "@/components/top-scorers-table";
 
 export default async function Page() {
   const allMatches = (await fetchMatches()) as IFetchMatchesResponse;
@@ -17,9 +17,12 @@ export default async function Page() {
         </div>
         <div className="col-span-4">
           <PaginationByRound maxRound={maxRound} />
-          <div className="flex flex-wrap gap-4 py-4">
+          <div className="py-4">
             <MatchesByRound allMatches={allMatches} />
           </div>
+        </div>
+        <div className="col-span-12">
+          <TopScorersTable />
         </div>
       </div>
     </main>
