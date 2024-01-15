@@ -18,7 +18,7 @@ export function PaginationByRound({ maxRound }: IPaginationByRoundProps) {
   }
 
   return (
-    <div className="flex flex-row space- items-center gap-1 py-4">
+    <div className="flex flex-row items-center gap-1">
       <button
         onClick={handlePreviousRound}
         disabled={selectedRound === 1 && true}
@@ -26,7 +26,7 @@ export function PaginationByRound({ maxRound }: IPaginationByRoundProps) {
       >
         <FaAngleLeft />
       </button>
-      <span className="text-xl font-semibold">Rodada {selectedRound}</span>
+      <span className="text-xl font-semibold">{selectedRound} Round</span>
       <button
         onClick={handleNextRound}
         disabled={selectedRound === maxRound - 1 && true}
