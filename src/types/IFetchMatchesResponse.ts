@@ -1,4 +1,4 @@
-import { IMatch } from "./IMatches";
+import { IMatch } from "./IMatch";
 
 export interface IFetchMatchesResponse {
   data: IMatch[];

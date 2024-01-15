@@ -1,22 +1,24 @@
-interface ISDEEquipe {
+interface ISDETeam {
   equipe_id: number;
 }
 
 export interface ITeamDetails {
-  tecnico: string | null;
-  nome: string;
-  cidade: string;
-  estado: string;
-  isTimeGrande: boolean;
+  country: string;
+  fakeTeam: boolean;
+  nationalTeam: boolean;
   urlLogo: string;
-  selecao: boolean;
-  torcedorNoSingular: string | null;
-  torcedorNoPlural: string | null;
-  timeFantasia: boolean;
-  estadio: string;
-  idTecnico: number | null;
-  sde: ISDEEquipe;
-  pais: string;
-  sigla: string;
+  idCoach: null | number;
+  fansSingular: null | string;
+  fansPlural: null | string;
+  topTeam: boolean;
+  stadium: null | string;
+  initials: string;
+  coach: null | string;
+  inserted: null | string;
+  updated: string;
+  city: string;
+  name: string;
   id: number;
+  state: string;
+  sde: ISDETeam;
 }
