@@ -1,5 +1,5 @@
 import { unstable_noStore } from "next/cache";
-import { matchesURL, teamURL } from "./constants";
+import { matchesURL, standingsURL, teamURL } from "./constants";
 
 export async function fetchMatches() {
   unstable_noStore();
@@ -24,5 +24,18 @@ export async function fetchTeamById(id: number) {
     return await response.json();
   } catch (error) {
     console.log(`Error trying to get the id from: ${id}`, error);
+  }
+}
+
+export async function fetchStandings() {
+  unstable_noStore();
+  try {
+    const response = await fetch(standingsURL, {
+      headers: { Authorization: `Bearer ${process.env.FOOTSTATS_TOKEN}` },
+    });
+
+    return await response.json();
+  } catch (error) {
+    console.log("Error to get the standings", error);
   }
 }
