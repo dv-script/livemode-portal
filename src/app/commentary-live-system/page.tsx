@@ -2,10 +2,8 @@ import { fetchMatches } from "@/lib/fetcher";
 import { IFetchMatchesResponse } from "@/types/IFetchMatchesResponse";
 import { PaginationByRound } from "@/components/pagination-by-round";
 import { MatchesByRound } from "@/components/matches-by-round";
-import { unstable_noStore } from "next/cache";
 
 export default async function Page() {
-  unstable_noStore();
   const allMatches = await fetchMatches() as IFetchMatchesResponse;
 
   return (

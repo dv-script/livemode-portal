@@ -5,14 +5,12 @@ import { IMatch } from "@/types/IMatches";
 import { ITeamDetails } from "@/types/ITeamDetails";
 import { formatDateAbbreviation } from "@/utils/formatDateAbbreviation";
 import Image from "next/image";
-import { unstable_noStore } from "next/cache";
 
 export async function MatchesByRound({
   allMatches,
 }: {
   allMatches: IFetchMatchesResponse;
 }) {
-  unstable_noStore();
   const matchesFilteredByRound = allMatches.data.filter(
     (match: IMatch) => match.rodada === 3
   );
