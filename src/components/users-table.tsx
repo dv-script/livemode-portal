@@ -1,7 +1,6 @@
 import { User, Tooltip } from "@nextui-org/react";
 import { getAllUsers } from "@/actions/get-all-users";
 import { EditUserModal } from "@/components/edit-user-modal";
-import { TbTrash } from "react-icons/tb";
 import { formatDate } from "@/utils/formatDate";
 import { DeleteUserModal } from "./delete-user-modal";
 
