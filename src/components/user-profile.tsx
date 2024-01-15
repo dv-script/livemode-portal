@@ -20,9 +20,11 @@ export function UserProfile({ first_name, last_name, company, isAdmin }: UserPro
           as="button"
           name={`${first_name} ${last_name}`}
           description={company}
-          className="transition-transform"
+          className="transition-transform text-ellipsis whitespace-nowrap overflow-hidden"
           avatarProps={{
-            src: "https://github.com/dv-script.png"
+            radius: "full",
+            name: first_name[0],
+            color: "primary"
           }}
         />
       </PopoverTrigger>
