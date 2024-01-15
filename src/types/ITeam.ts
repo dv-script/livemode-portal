@@ -2,7 +2,7 @@ interface ISDETeam {
   equipe_id: number;
 }
 
-export interface ITeamDetails {
+export interface ITeam {
   country: string;
   fakeTeam: boolean;
   nationalTeam: boolean;

@@ -1,6 +1,6 @@
-import { ITeamDetails } from "./ITeamDetails";
+import { ITeam } from "./ITeam";
 
 export interface IFetchTeamResponse {
-  data: ITeamDetails;
+  data: ITeam;
   pagination: null;
 }

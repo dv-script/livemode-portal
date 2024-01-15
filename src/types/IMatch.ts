@@ -1,4 +1,4 @@
-import { ITeamDetails } from "./ITeamDetails";
+import { ITeamDetails } from "./ITeam";
 
 interface IScore {
   goalsHome: number;
