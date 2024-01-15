@@ -2,7 +2,7 @@ import { fetchTeamById } from "@/lib/fetcher";
 import { IFetchMatchesResponse } from "@/types/IFetchMatchesResponse";
 import { IFetchTeamResponse } from "@/types/IFetchTeamResponse";
 import { IMatch } from "@/types/IMatch";
-import { ITeamDetails } from "@/types/ITeamDetails";
+import { ITeam } from "@/types/ITeam";
 import { formatDateAbbreviation } from "@/utils/formatDateAbbreviation";
 import { Tooltip } from "@nextui-org/react";
 import Image from "next/image";
@@ -28,12 +28,12 @@ export async function MatchesByRound({ allMatches }: IMatchesByRoundProps) {
     Array.from(teamIds).map(fetchTeamById)
   );
 
-  const teamDetailsMap: Record<string, ITeamDetails> = teamsDetails.reduce(
+  const teamDetailsMap: Record<string, ITeam> = teamsDetails.reduce(
     (acc, teamResponse) => {
       acc[teamResponse.data.id] = teamResponse.data;
       return acc;
     },
-    {} as Record<string, ITeamDetails>
+    {} as Record<string, ITeam>
   );
 
   const detailedMatches = matchesFilteredByRound.map((match: IMatch) => ({
