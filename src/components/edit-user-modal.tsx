@@ -1,19 +1,21 @@
-'use client';
+"use client";
 import { Modal, ModalContent, useDisclosure } from "@nextui-org/react";
 import { PiPencilLine } from "react-icons/pi";
 import { EditUserForm } from "./edit-user-form";
 
 interface IUser {
   user: {
-    id: string
-    email: string
-    first_name: string
-    last_name: string
-    company: string
-    roles: string[]
-    created_at: Date
-    updated_at: Date
-  }
+    id: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    company: string;
+    phoneNumber: string;
+    status: string;
+    roles: string[];
+    createdAt: Date;
+    updatedAt: Date;
+  };
 }
 
 export function EditUserModal({ user }: IUser) {
@@ -21,7 +23,10 @@ export function EditUserModal({ user }: IUser) {
 
   return (
     <>
-      <button onClick={onOpen} className="text-lg text-default-500 cursor-pointer active:opacity-50">
+      <button
+        onClick={onOpen}
+        className="text-lg text-default-500 cursor-pointer active:opacity-50"
+      >
         <PiPencilLine />
       </button>
       <Modal
@@ -31,12 +36,7 @@ export function EditUserModal({ user }: IUser) {
         backdrop="blur"
       >
         <ModalContent>
-          {(onClose) => (
-            <EditUserForm 
-              user={user}
-              onClose={onClose}
-            />
-          )}
+          {(onClose) => <EditUserForm user={user} onClose={onClose} />}
         </ModalContent>
       </Modal>
     </>
