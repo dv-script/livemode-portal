@@ -1,4 +1,4 @@
-import { ChangeYourPasswordForm } from "@/components/edit-your-profile-form";
+import { ChangeYourPasswordForm } from "@/components/change-your-password-form";
 
 export default function Page() {
   return (
