@@ -1,10 +1,14 @@
 "use server";
-import { sql } from "@vercel/postgres";
+import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 export async function deleteUser(userId: string) {
   try {
-    await sql`DELETE FROM users WHERE id = ${userId}`;
+    await prisma.users.delete({
+      where: {
+        id: userId,
+      },
+    });
     revalidatePath("/admin");
   } catch (error) {
     console.error(error);

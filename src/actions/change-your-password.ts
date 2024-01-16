@@ -1,19 +1,25 @@
 "use server";
 import { z } from "zod";
-import { sql } from "@vercel/postgres";
+import { prisma } from "@/lib/prisma";
 import bcrypt from "bcrypt";
 import { auth } from "@/app/auth/providers";
 
 const changeYourPasswordSchema = z.object({
   currentPassword: z
     .string()
-    .min(8, { message: "Password has to be at least 8 characters long" }),
+    .min(6, {
+      message: "The current password has to be at least 6 characters long",
+    }),
   password: z
     .string()
-    .min(8, { message: "Password has to be at least 8 characters long" }),
+    .min(6, {
+      message: "The new password has to be at least 6 characters long",
+    }),
   passwordConfirmation: z
     .string()
-    .min(8, { message: "Password has to be at least 8 characters long" }),
+    .min(6, {
+      message: "The password confirmation has to be at least 6 characters long",
+    }),
 });
 
 export type State = {
@@ -56,14 +62,13 @@ export async function changeYourPassword(prevState: State, formData: FormData) {
     };
   }
 
-  const user = await sql`
-    SELECT * FROM users WHERE email = ${session?.user.email}
-  `;
+  const user = await prisma.users.findUniqueOrThrow({
+    where: {
+      email: session?.user.email as string,
+    },
+  });
 
-  const passwordMatch = await bcrypt.compare(
-    currentPassword,
-    user.rows[0].password
-  );
+  const passwordMatch = await bcrypt.compare(currentPassword, user.password);
 
   if (!passwordMatch) {
     return {
@@ -77,11 +82,15 @@ export async function changeYourPassword(prevState: State, formData: FormData) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
-    await sql`
-      UPDATE users
-      SET password = ${hashedPassword}
-      WHERE email = ${session?.user.email}
-    `;
+    await prisma.users.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        password: hashedPassword,
+      },
+    });
+
     return {
       message: "Password has been changed successfully.",
       success: true,
