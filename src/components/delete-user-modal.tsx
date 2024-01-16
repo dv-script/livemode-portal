@@ -12,20 +12,17 @@ import { TbTrash } from "react-icons/tb";
 import { deleteUser } from "@/actions/delete-user";
 import toast from "react-hot-toast";
 
-interface IUser {
-  user: {
-    id: string
-    email: string
-    first_name: string
-    last_name: string
-    company: string
-    roles: string[]
-    created_at: Date
-    updated_at: Date
-  };
+interface DeleteUserModalProps {
+  firstName: string;
+  id: string;
+  lastName: string;
 }
 
-export function DeleteUserModal({ user }: IUser) {
+export function DeleteUserModal({
+  firstName,
+  id,
+  lastName,
+}: DeleteUserModalProps) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
@@ -44,18 +41,26 @@ export function DeleteUserModal({ user }: IUser) {
       >
         <ModalContent>
           {(onClose) => (
-            <form action={() => deleteUser(user.id)}>
+            <form action={() => deleteUser(id)}>
               <ModalHeader className="flex flex-col gap-1">
                 Edit User
               </ModalHeader>
               <ModalBody>
-                <p>Are you sure you want to delete {user.first_name} {user.last_name}?</p>
+                <p>
+                  Are you sure you want to delete {firstName} {lastName}?
+                </p>
               </ModalBody>
               <ModalFooter>
-                <Button type="submit" color="primary" onPress={() => {
-                  onClose()
-                  toast.success(`${user.first_name} ${user.last_name} was deleted successfully!`)
-                }}>
+                <Button
+                  type="submit"
+                  color="primary"
+                  onPress={() => {
+                    onClose();
+                    toast.success(
+                      `${firstName} ${lastName} was deleted successfully!`
+                    );
+                  }}
+                >
                   Confirm
                 </Button>
               </ModalFooter>
