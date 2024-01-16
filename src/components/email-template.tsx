@@ -4,7 +4,6 @@ import {
   Head,
   Heading,
   Html,
-  Img,
   Link,
   Tailwind,
   Text,
@@ -46,8 +45,8 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
           </Container>
 
           <Container className="flex flex-col gap-2.5">
-            <Heading>What's next?</Heading>
-            <Text>You're all set to start! Log in to your new account and dive into the Livemode experience. Discover, connect, and enjoy the journey with us.</Text>
+            <Heading>What&apos;s next?</Heading>
+            <Text>You&aposre all set to start! Log in to your new account and dive into the Livemode experience. Discover, connect, and enjoy the journey with us.</Text>
           </Container>
 
           <Container className="mb-5 flex justify-center items-center w-full">
