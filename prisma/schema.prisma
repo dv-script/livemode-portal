@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model Users {
+  id          String    @id @default(uuid())
+  firstName   String    @db.VarChar(30)
+  lastName    String    @db.VarChar(60)
+  email       String    @unique @db.VarChar(60)
+  phoneNumber String    @db.VarChar(30)
+  company     String    @db.VarChar(60)
+  password    String    @db.VarChar(120)
+  status      String    @db.VarChar(30)
+  roles       String[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt
+}
+
+model AccountsRequested {
+  id                   String   @id @default(uuid())
+  firstName            String   @db.VarChar(30)
+  lastName             String   @db.VarChar(60)
+  email                String   @unique @db.VarChar(60)
+  country              String   @db.VarChar(60)
+  state                String   @db.VarChar(60)
+  city                 String   @db.VarChar(60)
+  address              String   @db.VarChar(60)
+  b2bPortal            Boolean?
+  photoDatabase        Boolean?
+  commentaryLiveSystem Boolean?
+  costumerServiceTool  Boolean?
+  matchAnalysisHub     Boolean?
+  mediaPortal          Boolean?
+  phoneNumber          String   @db.VarChar(30)
+  company              String   @db.VarChar(60)
+}
