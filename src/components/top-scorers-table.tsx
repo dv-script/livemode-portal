@@ -41,15 +41,18 @@ export async function TopScorersTable() {
               <th className="px-4 font-normal py-2 uppercase ">Goals</th>
             </tr>
           </thead>
-          {topScorersWithPlayerDataFiltered.map((topScorer, index) => {
-            const showPosition =
-              index === 0 ||
-              topScorer.position !==
-                topScorersWithPlayerData[index - 1].position;
+          <tbody>
+            {topScorersWithPlayerDataFiltered.map((topScorer, index) => {
+              const showPosition =
+                index === 0 ||
+                topScorer.position !==
+                  topScorersWithPlayerData[index - 1].position;
 
-            return (
-              <tbody key={topScorer.idPlayer}>
-                <tr className="border-y-1 flex gap-4 justify-between items-center">
+              return (
+                <tr
+                  key={topScorer.idPlayer}
+                  className="border-y-1 flex gap-4 justify-between items-center"
+                >
                   <td className="px-4 py-2">
                     <div className="flex gap-2 items-center">
                       {showPosition ? (
@@ -82,9 +85,9 @@ export async function TopScorersTable() {
                   </td>
                   <td className="px-4 py-2">{topScorer.goals}</td>
                 </tr>
-              </tbody>
-            );
-          })}
+              );
+            })}
+          </tbody>
         </table>
       </div>
     </div>
