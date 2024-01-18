@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Head from "next/head";
 import { Poppins } from "next/font/google";
 import "@/styles/globals.css";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
+import { Header } from "@/components/h";
+import { Footer } from "@/components/f";
 import { NextUiProvider } from "@/providers/next-ui";
 import { Toaster } from "react-hot-toast"
 
