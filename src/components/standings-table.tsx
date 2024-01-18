@@ -22,7 +22,7 @@ export async function StandingsTable() {
           key={groupname}
           className="flex flex-col bg-white gap-4 mx-4 py-6 rounded-lg shadow-md overflow-x-auto hover:shadow-xl transition duration-300 ease-in-out lg:px-4"
         >
-          <span className="text-2xl px-4 font-semibold text-left uppercase">
+          <span className="sticky left-0 text-2xl px-4 font-semibold text-left uppercase">
             Group {groupname}
           </span>
           <table className="table-auto w-full">
