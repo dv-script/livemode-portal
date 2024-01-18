@@ -1,4 +1,4 @@
-import { ITeamDetails } from "./ITeam";
+import { ITeam } from "./ITeam";
 
 interface IScore {
   goalsHome: number;
@@ -50,8 +50,8 @@ interface IDateOfMatch {
 }
 
 export interface IMatch {
-  homeTeamDetails?: ITeamDetails;
-  awayTeamDetails?: ITeamDetails;
+  homeTeamDetails?: ITeam;
+  awayTeamDetails?: ITeam;
   hasNarration: boolean;
   sequenceMatch: null | number;
   dateUndefined: boolean;
