@@ -27,12 +27,7 @@ const RequestAnAccountFormSchema = z.object({
   phoneNumber: z
     .string()
     .refine((value) => !!value, { message: "Phone number is required" }),
-  b2bPortal: z.boolean().nullish(),
-  photoDatabase: z.boolean().nullish(),
-  commentaryLiveSystem: z.boolean().nullish(),
-  costumerServiceTool: z.boolean().nullish(),
-  matchAnalysisHub: z.boolean().nullish(),
-  mediaPortal: z.boolean().nullish(),
+  roles: z.array(z.string()),
 });
 
 export type State = {
@@ -46,18 +41,15 @@ export type State = {
     city?: string[];
     address?: string[];
     phoneNumber?: string[];
-    b2bPortal?: string[];
-    photoDatabase?: string[];
-    commentaryLiveSystem?: string[];
-    costumerServiceTool?: string[];
-    matchAnalysisHub?: string[];
-    mediaPortal?: string[];
+    roles?: string[];
   };
   message: string;
 };
 
 export async function requestAnAccount(prevState: State, formData: FormData) {
   noStore();
+  const allRoles = formData.getAll("roles");
+  const checkedRoles = allRoles.filter((role) => role !== "off");
 
   const validatedFields = RequestAnAccountFormSchema.safeParse({
     email: formData.get("email"),
@@ -69,12 +61,7 @@ export async function requestAnAccount(prevState: State, formData: FormData) {
     city: formData.get("city"),
     address: formData.get("address"),
     phoneNumber: formData.get("phoneNumber"),
-    b2bPortal: formData.get("b2bPortal"),
-    photoDatabase: formData.get("photoDatabase"),
-    commentaryLiveSystem: formData.get("commentaryLiveSystem"),
-    costumerServiceTool: formData.get("costumerServiceTool"),
-    matchAnalysisHub: formData.get("matchAnalysisHub"),
-    mediaPortal: formData.get("mediaPortal"),
+    roles: checkedRoles,
   });
 
   if (!validatedFields.success) {
@@ -95,13 +82,8 @@ export async function requestAnAccount(prevState: State, formData: FormData) {
     state,
     city,
     address,
+    roles,
     phoneNumber,
-    b2bPortal,
-    photoDatabase,
-    commentaryLiveSystem,
-    costumerServiceTool,
-    matchAnalysisHub,
-    mediaPortal,
   } = validatedFields.data;
 
   try {
@@ -115,13 +97,8 @@ export async function requestAnAccount(prevState: State, formData: FormData) {
         state,
         city,
         address,
+        roles,
         phoneNumber,
-        b2bPortal,
-        photoDatabase,
-        commentaryLiveSystem,
-        costumerServiceTool,
-        matchAnalysisHub,
-        mediaPortal,
       },
     });
 
