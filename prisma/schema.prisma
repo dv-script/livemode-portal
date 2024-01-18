@@ -23,20 +23,15 @@ model Users {
 }
 
 model AccountsRequested {
-  id                   String   @id @default(uuid())
-  firstName            String   @db.VarChar(30)
-  lastName             String   @db.VarChar(60)
-  email                String   @unique @db.VarChar(60)
-  country              String   @db.VarChar(60)
-  state                String   @db.VarChar(60)
-  city                 String   @db.VarChar(60)
-  address              String   @db.VarChar(60)
-  b2bPortal            Boolean?
-  photoDatabase        Boolean?
-  commentaryLiveSystem Boolean?
-  costumerServiceTool  Boolean?
-  matchAnalysisHub     Boolean?
-  mediaPortal          Boolean?
-  phoneNumber          String   @db.VarChar(30)
-  company              String   @db.VarChar(60)
+  id          String   @id @default(uuid())
+  firstName   String   @db.VarChar(30)
+  lastName    String   @db.VarChar(60)
+  email       String   @unique @db.VarChar(60)
+  country     String   @db.VarChar(60)
+  state       String   @db.VarChar(60)
+  city        String   @db.VarChar(60)
+  address     String   @db.VarChar(60)
+  phoneNumber String   @db.VarChar(30)
+  company     String   @db.VarChar(60)
+  roles       String[]
 }
