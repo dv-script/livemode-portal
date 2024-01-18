@@ -1,23 +1,15 @@
-"use server"
-import { sql } from "@vercel/postgres"
-
-interface IUser {
-    id: string
-    email: string
-    first_name: string
-    last_name: string
-    password: string
-    company: string
-    roles: string[]
-    created_at: Date
-    updated_at: Date
-  }
+"use server";
+import { prisma } from "@/lib/prisma";
 
 export async function getUserByEmail(email: string) {
-    try {
-      const { rows } = await sql<IUser>`SELECT * FROM users WHERE email = ${email}`
-      return rows[0]
-    } catch (error) {
-        console.error(error)
-    }
+  try {
+    const user = prisma.users.findUnique({
+      where: {
+        email: email,
+      },
+    });
+    return user;
+  } catch (error) {
+    console.error(error);
   }
+}

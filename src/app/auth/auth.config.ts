@@ -23,25 +23,27 @@ export const authConfig = {
       }
 
       if (isAdminRoutes && !isAdmin) {
-        return Response.redirect(new URL("/", nextUrl))
+        return Response.redirect(new URL("/", nextUrl));
       }
 
       return true;
     },
     jwt({ token, user }) {
       if (user) {
+        token.status = user.status;
         token.roles = user.roles;
         token.company = user.company;
-        token.first_name = user.first_name;
-        token.last_name = user.last_name;
+        token.firstName = user.firstName;
+        token.lastName = user.lastName;
       }
       return token;
     },
     session({ session, token }) {
       if (token.roles) session.user.roles = token.roles;
       if (token.company) session.user.company = token.company;
-      if (token.first_name) session.user.first_name = token.first_name;
-      if (token.last_name) session.user.last_name = token.last_name;
+      if (token.firstName) session.user.firstName = token.firstName;
+      if (token.lastName) session.user.lastName = token.lastName;
+      if (token.status) session.user.status = token.status;
       return session;
     },
   },

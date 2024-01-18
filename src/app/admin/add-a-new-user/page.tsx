@@ -1,4 +1,4 @@
-import { AddANewUserForm } from "@/components/add-a-new-user"
+import { AddANewUserForm } from "@/components/add-a-new-user-form"
 
 export default function AddANewUser() {
     return (

@@ -1,50 +1,83 @@
 import React from "react";
-import {Popover, PopoverTrigger, PopoverContent, User, Card, CardBody } from "@nextui-org/react";
-import { LuSettings, LuUserCircle, LuHelpCircle, LuKeyRound } from "react-icons/lu";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  User,
+  Card,
+  CardBody,
+} from "@nextui-org/react";
+import {
+  LuSettings,
+  LuUserCircle,
+  LuHelpCircle,
+  LuKeyRound,
+} from "react-icons/lu";
 import Link from "next/link";
 import { UserLogout } from "./user-logout";
 
 interface UserProfileProps {
-  image?: string
-  first_name: string
-  last_name: string
-  company: string
-  isAdmin: boolean
+  firstName: string;
+  lastName: string;
+  company: string;
+  isAdmin: boolean;
 }
 
-export function UserProfile({ first_name, last_name, company, isAdmin }: UserProfileProps) {
+export function UserProfile({
+  firstName,
+  lastName,
+  company,
+  isAdmin,
+}: UserProfileProps) {
   return (
     <Popover showArrow placement="bottom">
       <PopoverTrigger>
-        <User   
+        <User
           as="button"
-          name={`${first_name} ${last_name}`}
+          name={`${firstName} ${lastName}`}
           description={company}
           className="transition-transform text-ellipsis whitespace-nowrap overflow-hidden"
           avatarProps={{
             radius: "full",
-            name: first_name[0],
-            color: "primary"
+            name: firstName[0],
+            color: "primary",
           }}
         />
       </PopoverTrigger>
       <PopoverContent className="p-1">
-        <Card shadow="none" className="max-w-[300px] min-w-44 border-none bg-transparent">
+        <Card
+          shadow="none"
+          className="max-w-[300px] min-w-44 border-none bg-transparent"
+        >
           <CardBody className="p-2">
-            {isAdmin && <Link href="/admin" className="flex items-center gap-2 text-left rounded-lg px-4 py-2 transition-all hover:bg-blue-100 hover:text-blue-700">
-              <LuKeyRound />
-              Admin
-            </Link>}
-            <Link href="/user/edit-profile" className="flex items-center gap-2 text-left rounded-lg px-4 py-2 transition-all hover:bg-blue-100 hover:text-blue-700">
+            {isAdmin && (
+              <Link
+                href="/admin"
+                className="flex items-center gap-2 text-left rounded-lg px-4 py-2 transition-all hover:bg-blue-100 hover:text-blue-700"
+              >
+                <LuKeyRound />
+                Admin
+              </Link>
+            )}
+            <Link
+              href="/user/edit-profile/change-your-password"
+              className="flex items-center gap-2 text-left rounded-lg px-4 py-2 transition-all hover:bg-blue-100 hover:text-blue-700"
+            >
               <LuUserCircle />
               Edit profile
             </Link>
-            <Link href="user/settings" className="flex items-center gap-2 text-left rounded-lg px-4 py-2 transition hover:bg-blue-100 hover:text-blue-700">
+            <Link
+              href="user/settings"
+              className="flex items-center gap-2 text-left rounded-lg px-4 py-2 transition hover:bg-blue-100 hover:text-blue-700"
+            >
               <LuSettings />
               Settings
             </Link>
-            <Link href="/help-and-feedback" className="flex items-center gap-2 text-left rounded-lg px-4 py-2 transition hover:bg-blue-100 hover:text-blue-700">
-              <LuHelpCircle  />
+            <Link
+              href="/help-and-feedback"
+              className="flex items-center gap-2 text-left rounded-lg px-4 py-2 transition hover:bg-blue-100 hover:text-blue-700"
+            >
+              <LuHelpCircle />
               Help & Feedback
             </Link>
             <UserLogout />

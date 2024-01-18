@@ -1,49 +1,63 @@
 "use server";
 import { z } from "zod";
-import { sql } from "@vercel/postgres";
-import { unstable_noStore as noStore } from 'next/cache';
+import { prisma } from "@/lib/prisma";
+import { unstable_noStore as noStore } from "next/cache";
 
 const RequestAnAccountFormSchema = z.object({
-  email: z.string().email({ message: 'Invalid email address' }),
-  company: z.string().refine(value => !!value, { message: 'Company is required'}),
-  firstName: z.string().min(2, { message: 'First name has to be at least 2 characters long' }),
-  lastName: z.string().min(2, { message: 'Last name has to be at least 2 characters long' }),
-  country: z.string().refine(value => !!value, { message: 'Country is required'}),
-  state: z.string().refine(value => !!value, { message: 'State is required'}),
-  city: z.string().refine(value => !!value, { message: 'City is required'}),
-  address: z.string().refine(value => !!value, { message: 'Address is required'}),
-  phoneNumber: z.string().refine(value => !!value, { message: 'Phone number is required'}),
-  b2bPortal: z.string().nullish(),
-  photoDatabase: z.string().nullish(),
-  commentaryLiveSystem: z.string().nullish(),
-  costumerServiceTool: z.string().nullish(),
-  matchAnalysisHub: z.string().nullish(),
-  mediaPortal: z.string().nullish(),
-})
+  email: z.string().email({ message: "Invalid email address" }),
+  company: z
+    .string()
+    .refine((value) => !!value, { message: "Company is required" }),
+  firstName: z
+    .string()
+    .min(2, { message: "First name has to be at least 2 characters long" }),
+  lastName: z
+    .string()
+    .min(2, { message: "Last name has to be at least 2 characters long" }),
+  country: z
+    .string()
+    .refine((value) => !!value, { message: "Country is required" }),
+  state: z
+    .string()
+    .refine((value) => !!value, { message: "State is required" }),
+  city: z.string().refine((value) => !!value, { message: "City is required" }),
+  address: z
+    .string()
+    .refine((value) => !!value, { message: "Address is required" }),
+  phoneNumber: z
+    .string()
+    .refine((value) => !!value, { message: "Phone number is required" }),
+  b2bPortal: z.boolean().nullish(),
+  photoDatabase: z.boolean().nullish(),
+  commentaryLiveSystem: z.boolean().nullish(),
+  costumerServiceTool: z.boolean().nullish(),
+  matchAnalysisHub: z.boolean().nullish(),
+  mediaPortal: z.boolean().nullish(),
+});
 
 export type State = {
   errors?: {
-    email?: string[]
-    company?: string[]
-    firstName?: string[]
-    lastName?: string[]
-    country?: string[]
-    state?: string[]
-    city?: string[]
-    address?: string[]
-    phoneNumber?: string[]
-    b2bPortal?: string[]
-    photoDatabase?: string[]
-    commentaryLiveSystem?: string[]
-    costumerServiceTool?: string[]
-    matchAnalysisHub?: string[]
-    mediaPortal?: string[]
+    email?: string[];
+    company?: string[];
+    firstName?: string[];
+    lastName?: string[];
+    country?: string[];
+    state?: string[];
+    city?: string[];
+    address?: string[];
+    phoneNumber?: string[];
+    b2bPortal?: string[];
+    photoDatabase?: string[];
+    commentaryLiveSystem?: string[];
+    costumerServiceTool?: string[];
+    matchAnalysisHub?: string[];
+    mediaPortal?: string[];
   };
-  message: string
+  message: string;
 };
 
 export async function requestAnAccount(prevState: State, formData: FormData) {
-  noStore()
+  noStore();
 
   const validatedFields = RequestAnAccountFormSchema.safeParse({
     email: formData.get("email"),
@@ -91,45 +105,33 @@ export async function requestAnAccount(prevState: State, formData: FormData) {
   } = validatedFields.data;
 
   try {
-    await sql`INSERT INTO 
-      request_an_account (
-        first_name,
-        last_name,
+    await prisma.accountsRequested.create({
+      data: {
         email,
         company,
+        firstName,
+        lastName,
         country,
         state,
         city,
         address,
-        phone_number,
-        b2b_portal,
-        photo_database,
-        commentary_live_system,
-        costumer_service_tool,
-        match_analysis_hub,
-        media_portal
-      ) VALUES (
-        ${firstName},
-        ${lastName},
-        ${email},
-        ${company},
-        ${country},
-        ${state},
-        ${city},
-        ${address},
-        ${phoneNumber},
-        ${b2bPortal},
-        ${photoDatabase},
-        ${commentaryLiveSystem},
-        ${costumerServiceTool},
-        ${matchAnalysisHub},
-        ${mediaPortal}
-      )`;
-    
-    return { message: "Your request has been sent successfully.", success: true };
+        phoneNumber,
+        b2bPortal,
+        photoDatabase,
+        commentaryLiveSystem,
+        costumerServiceTool,
+        matchAnalysisHub,
+        mediaPortal,
+      },
+    });
+
+    return {
+      message: "Your request has been sent successfully.",
+      success: true,
+    };
   } catch (error) {
     if (error instanceof Error) {
-      return { message: 'Failed to request an account', success: false };
+      return { message: "Failed to request an account", success: false };
     }
     throw error;
   }
