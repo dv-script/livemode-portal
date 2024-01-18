@@ -36,6 +36,7 @@ export type State = {
     phoneNumber?: string[];
   };
   message?: string;
+  success?: boolean;
 };
 
 export async function addANewUser(prevState: State, formData: FormData) {
@@ -103,12 +104,12 @@ export async function addANewUser(prevState: State, formData: FormData) {
 
     return {
       message: "User created successfully.",
+      success: true,
     };
   } catch (err) {
     return {
+      success: false,
       message: "Something went wrong. Please, try again later.",
     };
   }
-
-  redirect("/admin");
 }

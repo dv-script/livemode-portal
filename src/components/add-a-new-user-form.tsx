@@ -1,12 +1,13 @@
 "use client";
 import { useFormState } from "react-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { PiCaretLeft, PiPassword } from "react-icons/pi";
 import { addANewUser } from "@/actions/add-a-new-user";
 import { createHash } from "@/utils/createHash";
 import { Button, Checkbox, Input } from "@nextui-org/react";
 import { allRoles } from "@/utils/constants/all-roles";
+import toast from "react-hot-toast";
 
 export function AddANewUserForm() {
   const [password, setPassword] = useState("");
@@ -17,6 +18,12 @@ export function AddANewUserForm() {
     const hash = createHash();
     setPassword(hash);
   }
+
+  useEffect(() => {
+    if (state?.success) {
+      toast.success(state.message);
+    }
+  }, [state?.success, state?.message]);
 
   return (
     <form
