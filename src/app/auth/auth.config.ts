@@ -49,43 +49,40 @@ export const authConfig = {
         return Response.redirect(new URL("/", nextUrl));
       }
 
-      if (isAdminRoutes && !hasAdminAccess && !statusActive) {
+      if ((isAdminRoutes && !hasAdminAccess) || !statusActive) {
         return Response.redirect(new URL("/", nextUrl));
       }
 
-      if (isB2bRoutes && !hasB2bPortalAccess && !statusActive) {
+      if ((isB2bRoutes && !hasB2bPortalAccess) || !statusActive) {
         return Response.redirect(new URL("/", nextUrl));
       }
 
-      if (isPhotoDatabaseRoutes && !hasPhotoDatabaseAccess && !statusActive) {
+      if ((isPhotoDatabaseRoutes && !hasPhotoDatabaseAccess) || !statusActive) {
         return Response.redirect(new URL("/", nextUrl));
       }
 
       if (
-        isCommentaryLiveSystemRoutes &&
-        !hasCommentaryLiveSystemAccess &&
+        (isCommentaryLiveSystemRoutes && !hasCommentaryLiveSystemAccess) ||
         !statusActive
       ) {
         return Response.redirect(new URL("/", nextUrl));
       }
 
       if (
-        isCostumerServiceToolRoutes &&
-        !hasCostumerServiceToolAccess &&
+        (isCostumerServiceToolRoutes && !hasCostumerServiceToolAccess) ||
         !statusActive
       ) {
         return Response.redirect(new URL("/", nextUrl));
       }
 
       if (
-        isMatchAnalysisHubRoutes &&
-        !hasMatchAnalysisHubAccess &&
+        (isMatchAnalysisHubRoutes && !hasMatchAnalysisHubAccess) ||
         !statusActive
       ) {
         return Response.redirect(new URL("/", nextUrl));
       }
 
-      if (isMediaPortalRoutes && !hasMediaPortalAccess && !statusActive) {
+      if ((isMediaPortalRoutes && !hasMediaPortalAccess) || !statusActive) {
         return Response.redirect(new URL("/", nextUrl));
       }
 
