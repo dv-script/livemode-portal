@@ -25,6 +25,7 @@ declare module "next-auth" {
 
 declare module "@auth/core/jwt" {
   interface JWT {
+    expires: string;
     firstName: string;
     lastName: string;
     company: string;
