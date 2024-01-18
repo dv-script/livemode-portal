@@ -6,6 +6,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { NextUiProvider } from "@/providers/next-ui";
 import { Toaster } from "react-hot-toast";
+import { Analytics } from "@vercel/analytics/react";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -35,6 +36,7 @@ export default function RootLayout({
             <Footer />
           </div>
         </NextUiProvider>
+        <Analytics />
       </body>
     </html>
   );
