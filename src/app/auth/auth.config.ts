@@ -14,6 +14,10 @@ export const authConfig = {
         isPrivateRoutes && nextUrl.pathname.startsWith("/admin");
       const hasAdminAccess = auth?.user?.roles?.includes("admin");
 
+      if (!isLoggedIn && isPrivateRoutes) {
+        return false;
+      }
+
       if (isLoggedIn && isAuthRoutes) {
         return Response.redirect(new URL("/", nextUrl));
       }
