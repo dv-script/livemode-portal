@@ -3,7 +3,7 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { useState } from "react";
 
 interface IPaginationByRoundProps {
-  maxRound: number | undefined;
+  maxRound: number | null;
 }
 
 export function PaginationByRound({ maxRound }: IPaginationByRoundProps) {
