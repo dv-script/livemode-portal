@@ -3,14 +3,14 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { useState } from "react";
 
 interface IPaginationByRoundProps {
-  maxRound: number;
+  maxRound: number | undefined;
 }
 
 export function PaginationByRound({ maxRound }: IPaginationByRoundProps) {
   const [selectedRound, setSelectedRound] = useState(1);
 
   function handleNextRound() {
-    if (selectedRound < maxRound) setSelectedRound((prev) => prev + 1);
+    if (maxRound && selectedRound < maxRound) setSelectedRound((prev) => prev + 1);
   }
 
   function handlePreviousRound() {
@@ -29,7 +29,7 @@ export function PaginationByRound({ maxRound }: IPaginationByRoundProps) {
       <span className="text-xl font-semibold">{selectedRound} Round</span>
       <button
         onClick={handleNextRound}
-        disabled={selectedRound === maxRound - 1 && true}
+        disabled={maxRound ? selectedRound === maxRound && true : true}
         className="border-none text-xl bg-transparent outline-none p-2 disabled:text-zinc-400"
       >
         <FaAngleRight />

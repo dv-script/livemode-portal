@@ -7,7 +7,7 @@ import { TopScorersTable } from "@/components/top-scorers-table";
 
 export default async function Page() {
   const allMatches = (await fetchMatches()) as IFetchMatchesResponse;
-  const maxRound = allMatches.data.slice(-1)[0].round;
+  const maxRound = allMatches && allMatches.data && allMatches.data.length > 0 ? allMatches.data.slice(-1)[0].round : null;
 
   return (
     <main className="flex bg-gray-100">
