@@ -114,13 +114,13 @@ export async function MatchesByRound({ allMatches }: IMatchesByRoundProps) {
               )}
             </div>
             <div className="flex flex-row gap-2 justify-center items-center">
-              {!notStarted ? (
+              {notStarted ? (
                 <span className="text-xs text-gray-400 hover:underline">
                   See details
                 </span>
               ) : (
                 <span className="text-xs text-gray-400">
-                  Details not avaible
+                  Details not available
                 </span>
               )}
             </div>
