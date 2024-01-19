@@ -4,9 +4,10 @@ export function formatDateAbbreviation(date: Date): string {
       month: 'short' as const,
       hour: '2-digit' as const,
       minute: '2-digit' as const,
-      hour12: false as const,
+      hour12: true as const,
+      hourCycle: 'h12' as const,
   };
 
   const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
-  return formattedDate.replace(',', ' -');
+  return formattedDate.replace(',', ' -');
 }
