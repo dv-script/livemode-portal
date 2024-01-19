@@ -6,6 +6,6 @@ export function formatDate(date: Date) {
     hour: 'numeric' as const,
     minute: 'numeric' as const,
   };
-  return new Date(date).toLocaleDateString('pt-BR', options);
+  return new Date(date).toLocaleDateString('en-US', options);
 }
  

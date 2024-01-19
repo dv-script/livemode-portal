@@ -7,6 +7,6 @@ export function formatDateAbbreviation(date: Date): string {
       hour12: false as const,
   };
 
-  const formattedDate = new Intl.DateTimeFormat('pt-BR', options).format(date);
+  const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
   return formattedDate.replace(',', ' -');
 }
