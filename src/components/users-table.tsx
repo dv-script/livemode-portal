@@ -35,7 +35,7 @@ export async function UsersTable() {
                 <User
                   avatarProps={{
                     radius: "full",
-                    name: user.firstName[0],
+                    name: user.firstName[0] + user.lastName[0],
                     color: "primary",
                   }}
                   description={user.email}

@@ -39,7 +39,7 @@ export function UserProfile({
           className="transition-transform text-ellipsis whitespace-nowrap overflow-hidden"
           avatarProps={{
             radius: "full",
-            name: firstName[0],
+            name: firstName[0] + lastName[0],
             color: "primary",
           }}
         />
