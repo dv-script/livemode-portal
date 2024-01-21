@@ -46,11 +46,11 @@ export async function MatchesByRound({ allMatches }: IMatchesByRoundProps) {
     <div className="flex flex-wrap gap-2 md:flex-col md:w-full">
       {detailedMatches.map((match: IMatch) => {
         const isLive = match.realtime;
-        const notStarted = match.gameTime === "Não iniciado";
+        const notStarted = match.gameTime === "Não Inic.";
 
         return (
           <Link
-            href={notStarted ? `/commentary-live-system/match/${match.id}` : ""}
+            href={!notStarted ? `/commentary-live-system/match/${match.id}` : ""}
             key={match.id}
             className="mx-auto w-full flex flex-col flex-nowrap gap-4 py-6 px-4 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out"
           >
@@ -114,7 +114,7 @@ export async function MatchesByRound({ allMatches }: IMatchesByRoundProps) {
               )}
             </div>
             <div className="flex flex-row gap-2 justify-center items-center">
-              {notStarted ? (
+              {!notStarted ? (
                 <span className="text-xs text-gray-400 hover:underline">
                   See details
                 </span>
