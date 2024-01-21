@@ -8,6 +8,7 @@ import { createHash } from "@/utils/createHash";
 import { Button, Checkbox, Input } from "@nextui-org/react";
 import { allRoles } from "@/utils/constants/all-roles";
 import toast from "react-hot-toast";
+import { SubmitButton } from "./submit-button";
 
 export function AddANewUserForm() {
   const [password, setPassword] = useState("");
@@ -36,6 +37,7 @@ export function AddANewUserForm() {
           href="/admin"
           className="absolute left-0"
           radius="full"
+          isIconOnly
         >
           <PiCaretLeft />
         </Button>
@@ -54,7 +56,7 @@ export function AddANewUserForm() {
             className="w-full"
           />
           {state?.errors?.email?.map((error: string) => (
-            <span key={error} className="text-red-500">
+            <span key={error} className="text-red-500 text-sm">
               {error}
             </span>
           ))}
@@ -83,7 +85,7 @@ export function AddANewUserForm() {
             </Button>
           </div>
           {state?.errors?.password?.map((error: string) => (
-            <span key={error} className="text-red-500">
+            <span key={error} className="text-red-500 text-sm">
               {error}
             </span>
           ))}
@@ -97,7 +99,7 @@ export function AddANewUserForm() {
             className="w-full"
           />
           {state?.errors?.company?.map((error: string) => (
-            <span key={error} className="text-red-500">
+            <span key={error} className="text-red-500 text-sm">
               {error}
             </span>
           ))}
@@ -111,7 +113,7 @@ export function AddANewUserForm() {
             className="w-full"
           />
           {state?.errors?.phoneNumber?.map((error: string) => (
-            <span key={error} className="text-red-500">
+            <span key={error} className="text-red-500 text-sm">
               {error}
             </span>
           ))}
@@ -125,7 +127,7 @@ export function AddANewUserForm() {
               placeholder="Enter a first name"
             />
             {state?.errors?.firstName?.map((error: string) => (
-              <span key={error} className="text-red-500">
+              <span key={error} className="text-red-500 text-sm">
                 {error}
               </span>
             ))}
@@ -137,7 +139,7 @@ export function AddANewUserForm() {
               placeholder="Enter a last name"
             />
             {state?.errors?.lastName?.map((error: string) => (
-              <span key={error} className="text-red-500">
+              <span key={error} className="text-red-500 text-sm">
                 {error}
               </span>
             ))}
@@ -149,7 +151,7 @@ export function AddANewUserForm() {
             Access to portals:
           </span>
           {state?.errors?.roles?.map((error: string) => (
-            <span key={error} className="text-red-500">
+            <span key={error} className="text-red-500 text-sm">
               {error}
             </span>
           ))}
@@ -172,9 +174,7 @@ export function AddANewUserForm() {
         </div>
       </div>
 
-      <Button type="submit" color="primary">
-        Create User
-      </Button>
+      <SubmitButton title="Add a new user" color="primary" />
     </form>
   );
 }
