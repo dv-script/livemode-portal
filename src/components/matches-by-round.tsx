@@ -14,7 +14,7 @@ interface IMatchesByRoundProps {
 
 export async function MatchesByRound({ allMatches }: IMatchesByRoundProps) {
   const matchesFilteredByRound = allMatches.data.filter(
-    (match: IMatch) => match.round === 3
+    (match: IMatch) => match.round === 1
   );
 
   const teamIds = new Set(
