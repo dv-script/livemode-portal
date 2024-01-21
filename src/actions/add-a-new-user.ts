@@ -1,10 +1,10 @@
 "use server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
-import { redirect } from "next/navigation";
 import bcrypt from "bcrypt";
 import { sendEmail } from "./send-email";
 import { EmailTemplate } from "@/components/email-template";
+import { revalidatePath } from "next/cache";
 
 const addANewUserSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -102,6 +102,7 @@ export async function addANewUser(prevState: State, formData: FormData) {
       }) as React.ReactElement,
     });
 
+    revalidatePath("/admin/users");
     return {
       message: "User created successfully.",
       success: true,
