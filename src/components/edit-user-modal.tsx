@@ -15,6 +15,7 @@ interface IUser {
     roles: string[];
     createdAt: Date;
     updatedAt: Date;
+    updatedBy: string;
   };
 }
 
