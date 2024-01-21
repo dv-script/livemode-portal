@@ -5,6 +5,7 @@ import { useFormState } from "react-dom";
 import { FormError } from "./form-error";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
+import { SubmitButton } from "./submit-button";
 
 export function ChangeYourPasswordForm() {
   const initialState = { message: "", errors: {} };
@@ -72,9 +73,7 @@ export function ChangeYourPasswordForm() {
 
       {state?.success === false && <FormError errorMessage={state.message} />}
 
-      <Button color="primary" type="submit">
-        Confirm
-      </Button>
+      <SubmitButton color="primary" style="w-full" title="Change Password" />
     </form>
   );
 }
