@@ -212,7 +212,7 @@ export function RequestAnAccountForm() {
         </div>
       </div>
 
-      <SubmitButton title="Request an account" />
+      <SubmitButton color="primary" style="w-full" title="Request an account" />
 
       <div className="text-sm text-center">
         <Link href="/auth/sign-in">

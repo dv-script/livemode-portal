@@ -64,7 +64,7 @@ export function LoginForm() {
         </div>
       </div>
       {state?.success === false && <FormError errorMessage={state.message} />}
-      <SubmitButton title="Sign in" />
+      <SubmitButton color="primary" style="w-full" title="Sign in" />
 
       <div className="w-full flex flex-col gap-1 items-center">
         <Link href="./forgot-your-password">
