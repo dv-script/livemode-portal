@@ -15,6 +15,7 @@ export async function getAllUsers() {
         roles: true,
         createdAt: true,
         updatedAt: true,
+        updatedBy: true,
       },
     });
     return users;
