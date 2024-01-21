@@ -4,8 +4,9 @@ import { useFormState } from "react-dom";
 import { useEffect } from "react";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import { Button, Checkbox, Input } from "@nextui-org/react";
+import { Checkbox, Input } from "@nextui-org/react";
 import { allRolesWithoutAdmin } from "@/utils/constants/all-roles-without-admin";
+import { SubmitButton } from "./submit-button";
 
 export function RequestAnAccountForm() {
   const initialState = { message: "", errors: {} };
@@ -144,7 +145,11 @@ export function RequestAnAccountForm() {
 
         <div className="flex flex-wrap gap-4">
           <div className="flex-1 flex flex-col gap-2">
-            <Input label="Address" name="address" placeholder="Your address" />
+            <Input
+              label="Address"
+              name="address"
+              placeholder="Enter your address"
+            />
             {state?.errors?.address?.map((error) => (
               <span
                 key={error}
@@ -160,7 +165,7 @@ export function RequestAnAccountForm() {
               label="Phone"
               name="phoneNumber"
               type="tel"
-              placeholder="Your phone number"
+              placeholder="Enter your phone number"
             />
             {state?.errors?.phoneNumber?.map((error) => (
               <span
@@ -207,9 +212,7 @@ export function RequestAnAccountForm() {
         </div>
       </div>
 
-      <Button type="submit" color="primary" fullWidth>
-        Request an account
-      </Button>
+      <SubmitButton title="Request an account" />
 
       <div className="text-sm text-center">
         <Link href="/auth/sign-in">
