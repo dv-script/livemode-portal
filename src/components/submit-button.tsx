@@ -2,11 +2,17 @@ import { Button } from "@nextui-org/react";
 import { useFormStatus } from "react-dom";
 import { Loading } from "./loading";
 
-export function SubmitButton({ title }: { title: string }) {
+interface ISubmitButtonProps {
+  title: string;
+  style?: string;
+  color: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+}
+
+export function SubmitButton({ title, style, color }: ISubmitButtonProps) {
   const { pending } = useFormStatus();
 
   return (
-    <Button className="w-full" color="primary" type="submit" disabled={pending}>
+    <Button className={style} color={color} type="submit" disabled={pending}>
       {pending ? <Loading /> : title}
     </Button>
   );
