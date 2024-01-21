@@ -1,4 +1,5 @@
 "use server";
+import { auth } from "@/app/auth/providers";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
@@ -22,6 +23,7 @@ const EditUserFormSchema = z.object({
     .string()
     .refine((value) => !!value, { message: "Phone number is required" }),
   updatedAt: z.string(),
+  updatedBy: z.string(),
 });
 
 export type State = {
@@ -39,6 +41,7 @@ export type State = {
 };
 
 export async function editUser(prevState: State, formData: FormData) {
+  const session = await auth();
   const allRoles = formData.getAll("roles");
   const checkedRoles = allRoles.filter((role) => role !== "off");
 
@@ -51,6 +54,7 @@ export async function editUser(prevState: State, formData: FormData) {
     status: formData.get("status"),
     roles: checkedRoles,
     updatedAt: new Date().toISOString(),
+    updatedBy: session?.user.email,
   });
 
   if (!validatedFields.success) {
@@ -71,6 +75,7 @@ export async function editUser(prevState: State, formData: FormData) {
     updatedAt,
     phoneNumber,
     status,
+    updatedBy,
   } = validatedFields.data;
 
   try {
@@ -87,6 +92,7 @@ export async function editUser(prevState: State, formData: FormData) {
         updatedAt,
         phoneNumber,
         status,
+        updatedBy,
       },
     });
     revalidatePath("/admin");
