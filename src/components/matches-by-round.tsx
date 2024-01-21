@@ -50,7 +50,9 @@ export async function MatchesByRound({ allMatches }: IMatchesByRoundProps) {
 
         return (
           <Link
-            href={!notStarted ? `/commentary-live-system/match/${match.id}` : ""}
+            href={
+              !notStarted ? `/commentary-live-system/match/${match.id}` : ""
+            }
             key={match.id}
             className="mx-auto w-full flex flex-col flex-nowrap gap-4 py-6 px-4 bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out"
           >
@@ -58,7 +60,9 @@ export async function MatchesByRound({ allMatches }: IMatchesByRoundProps) {
               <span className="text-sm whitespace-nowrap">
                 {formatDateAbbreviation(new Date(match.isoDate))}
               </span>
-              <span className="text-sm whitespace-nowrap text-zinc-500">{match.stadium}</span>
+              <span className="text-sm whitespace-nowrap text-zinc-500">
+                {match.stadium}
+              </span>
             </div>
             <div className="flex flex-col gap-1 items-center">
               <div className="flex flex-row gap-4 justify-center items-center font-bold text-xl text-zinc-600">
@@ -79,12 +83,14 @@ export async function MatchesByRound({ allMatches }: IMatchesByRoundProps) {
                     </span>
                   </Tooltip>
                 </div>
-                {!notStarted && (
+                {!notStarted ? (
                   <div className="flex items-center gap-1">
                     <span>{match.gameScore.goalsHome}</span>
                     <span>x</span>
                     <span>{match.gameScore.goalsAway}</span>
                   </div>
+                ) : (
+                  <span>x</span>
                 )}
                 <div className="flex items-center gap-2">
                   <Tooltip
