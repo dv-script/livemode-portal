@@ -1,4 +1,11 @@
 import { LoginForm } from "@/components/login-form";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "FPF - Account Sign-in",
+  description:
+    "Sign in to the FPF Services Portal for exclusive access to content management tools.",
+};
 
 export default function SignIn() {
   return (

@@ -1,4 +1,11 @@
 import { ChangeYourPasswordForm } from "@/components/change-your-password-form";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "FPF - Change Your Password",
+  description:
+    "Change your password to ensure the security of your account and protect your personal information.",
+};
 
 export default function Page() {
   return (

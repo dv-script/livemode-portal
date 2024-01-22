@@ -1,6 +1,13 @@
 import Link from "next/link";
 import { UsersTable } from "@/components/users-table";
 import { Button } from "@nextui-org/react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "FPF - User Management Dashboard",
+  description:
+    "Administrate and manage all user accounts with full control over creation, editing, and deletion. Access detailed user information and perform batch actions for efficient user management.",
+};
 
 export default function Admin() {
   return (
