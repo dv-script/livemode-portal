@@ -17,6 +17,9 @@ export async function getAllUsers() {
         updatedAt: true,
         updatedBy: true,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
     return users;
   } catch (error) {
