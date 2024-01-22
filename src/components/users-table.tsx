@@ -12,14 +12,20 @@ export async function UsersTable() {
     <table>
       <thead className="sticky top-0 bg-white z-10 whitespace-nowrap text-left text-semibold text-sm font-semibold text-zinc-400 align-bottom">
         <tr>
-          <th className="pb-3 text-start min-w-[175px]">USER</th>
-          <th className="pb-3 text-start">COMPANY</th>
-          <th className="pb-3 pr-2 text-start">PHONE NUMBER</th>
-          <th className="pb-3 text-start min-w-[175px]">ROLES</th>
-          <th className="pb-3 text-start min-w-[175px]">CREATED AT</th>
-          <th className="pb-3 text-start min-w-[175px]">UPDATED AT</th>
-          <th className="pb-3 text-start">STATUS</th>
-          <th className="pb-3 text-start">ACTIONS</th>
+          <th className="pb-3 uppercase text-start min-w-[175px] bg-white sticky left-0">
+            USER
+          </th>
+          <th className="pb-3 uppercase text-start">COMPANY</th>
+          <th className="pb-3 uppercase pr-2 text-start">PHONE NUMBER</th>
+          <th className="pb-3 uppercase text-start min-w-[175px]">ROLES</th>
+          <th className="pb-3 uppercase text-start min-w-[175px]">
+            CREATED AT
+          </th>
+          <th className="pb-3 uppercase text-start min-w-[175px]">
+            UPDATED AT
+          </th>
+          <th className="pb-3 uppercase text-start">STATUS</th>
+          <th className="pb-3 uppercase text-start">ACTIONS</th>
         </tr>
       </thead>
       <tbody>
@@ -31,18 +37,20 @@ export async function UsersTable() {
 
           return (
             <tr key={user.id} className="border-b last:border-none">
-              <td className="pr-4 py-2">
-                <User
-                  avatarProps={{
-                    radius: "full",
-                    name: user.firstName[0] + user.lastName[0],
-                    color: "primary",
-                  }}
-                  description={user.email}
-                  name={user.firstName + " " + user.lastName}
-                >
-                  {user.email}
-                </User>
+              <td className="pr-4 py-2 bg-white left-0 sticky">
+                <div>
+                  <User
+                    avatarProps={{
+                      radius: "full",
+                      name: user.firstName[0] + user.lastName[0],
+                      color: "primary",
+                    }}
+                    description={user.email}
+                    name={user.firstName + " " + user.lastName}
+                  >
+                    {user.email}
+                  </User>
+                </div>
               </td>
               <td className="pr-4 py-2">
                 <span className="text-sm">{user.company}</span>
@@ -71,9 +79,18 @@ export async function UsersTable() {
                     : "text-center"
                 }
               >
-                <span className="text-sm">
-                  {user.updatedAt !== null ? formatDate(user.updatedAt) : "-"}
-                </span>
+                {user.updatedAt !== null ? (
+                  <span className="text-sm flex flex-col gap-2">
+                    {formatDate(user.updatedAt)}
+                    {user.updatedBy && (
+                      <span className="inline-block bg-blue-200 text-blue-800 px-2 py-1 rounded-full text-xs font-medium w-fit">
+                        by: {user.updatedBy.split("@")[0]}
+                      </span>
+                    )}
+                  </span>
+                ) : (
+                  <span className="text-sm">-</span>
+                )}
               </td>
               <td className="pr-4 py-2">
                 <div className="flex gap-2 items-center">

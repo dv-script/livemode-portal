@@ -1,4 +1,6 @@
-import { fetchTopScorers, fetchPlayerById, fetchTeamById } from "@/lib/fetcher";
+import { getTeamById } from "@/actions/data/get-team-by-id";
+import { getTopScorers } from "@/actions/data/get-top-scorers";
+import { getPlayersById } from "@/actions/data/get-players-by-id";
 import { IFetchPlayerResponse } from "@/types/IFetchPlayerResponse";
 import { IFetchTeamResponse } from "@/types/IFetchTeamResponse";
 import { IFetchTopScorersResponse } from "@/types/IFetchTopScorersResponse";
@@ -6,16 +8,14 @@ import { ITopScorer } from "@/types/ITopScorer";
 import Image from "next/image";
 
 export async function TopScorersTable() {
-  const topScorers = (await fetchTopScorers()) as IFetchTopScorersResponse;
+  const topScorers = (await getTopScorers()) as IFetchTopScorersResponse;
 
   const topScorersWithPlayerData = await Promise.all(
     topScorers.data.map(async (topScorer: ITopScorer) => {
-      const player = (await fetchPlayerById(
+      const player = (await getPlayersById(
         topScorer.idPlayer
       )) as IFetchPlayerResponse;
-      const team = (await fetchTeamById(
-        topScorer.idTeam
-      )) as IFetchTeamResponse;
+      const team = (await getTeamById(topScorer.idTeam)) as IFetchTeamResponse;
       return {
         ...topScorer,
         teamDetails: team.data,
@@ -54,7 +54,7 @@ export async function TopScorersTable() {
                   className="border-y-1 flex gap-4 justify-between items-center"
                 >
                   <td className="px-4 py-2">
-                    <div className="flex gap-2 items-center">
+                    <div className="flex gap-2 items-center flex-1">
                       {showPosition ? (
                         <span className="text-2xl text-zinc-500 min-w-6">
                           {topScorer.position}
@@ -64,14 +64,14 @@ export async function TopScorersTable() {
                       )}
                       <Image
                         src={""}
-                        alt={`Image from ${topScorer.player}`}
+                        alt={`${topScorer.player} picture`}
                         width={40}
                         height={40}
                         className="rounded-full"
                       />
                       <Image
                         src={topScorer.teamDetails.urlLogo}
-                        alt={`Logo from ${topScorer.teamDetails.name}`}
+                        alt={`${topScorer.teamDetails.name}'s logo`}
                         width={40}
                         height={40}
                       />

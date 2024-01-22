@@ -14,6 +14,7 @@ import { FormError } from "./form-error";
 import { useEffect } from "react";
 import { allRoles } from "@/utils/constants/all-roles";
 import { IUser } from "@/types/IUser";
+import { SubmitButton } from "./submit-button";
 
 const status = [
   {
@@ -49,7 +50,7 @@ export function EditUserForm({ onClose, user }: EditUserFormProps) {
   }, [onClose, state.success]);
 
   return (
-    <form action={dispatch}>
+    <form action={dispatch} >
       <ModalHeader className="flex flex-col gap-1">Edit User</ModalHeader>
       <ModalBody>
         <Input
@@ -179,9 +180,7 @@ export function EditUserForm({ onClose, user }: EditUserFormProps) {
         <Button type="reset" color="danger" variant="flat">
           Reset
         </Button>
-        <Button type="submit" color="primary">
-          Confirm
-        </Button>
+        <SubmitButton title="Confirm" color="primary" />
       </ModalFooter>
     </form>
   );

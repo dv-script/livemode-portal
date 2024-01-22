@@ -15,6 +15,10 @@ export async function getAllUsers() {
         roles: true,
         createdAt: true,
         updatedAt: true,
+        updatedBy: true,
+      },
+      orderBy: {
+        createdAt: "desc",
       },
     });
     return users;

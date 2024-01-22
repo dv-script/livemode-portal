@@ -1,5 +1,6 @@
 "use server";
 import { signIn } from "@/app/auth/providers";
+import { AuthError } from "next-auth";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -16,7 +17,7 @@ export type State = {
     password?: string[];
   };
   message?: string;
-  sucess?: boolean;
+  success?: boolean;
 };
 
 export async function authenticateUser(prevState: State, formData: FormData) {
@@ -32,12 +33,34 @@ export async function authenticateUser(prevState: State, formData: FormData) {
     };
   }
 
+  const { email, password } = validatedFields.data;
+
   try {
-    await signIn("credentials", Object.fromEntries(formData));
-  } catch (error) {
-    if ((error as Error).message.includes("CredentialsSignin")) {
-      return { message: "Email or password are wrong.", success: false };
+    await signIn("credentials", {
+      email,
+      password,
+      redirectTo: "/",
+    });
+    return {
+      success: true,
+      message: "You have been successfully logged in.",
     }
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return {
+            message: "E-mail or password is invalid. Please, try again.",
+            success: false
+          };
+        default: 
+          return {
+            message: "Something went wrong. Please, try again.",
+            success: false
+          };
+      }
+    }
+
+    throw error;
   }
-  redirect("/");
 }

@@ -1,11 +1,14 @@
 "use client";
 import Link from "next/link";
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import { authenticateUser } from "@/actions/authenticate-user";
 import { FormError } from "./form-error";
 import { Button, Input } from "@nextui-org/react";
+import { Loading } from "./loading";
+import { SubmitButton } from "./submit-button";
 
 export function LoginForm() {
+  const { pending } = useFormStatus();
   const initialState = { message: "", errors: {} };
   const [state, dispatch] = useFormState(authenticateUser, initialState);
 
@@ -24,9 +27,18 @@ export function LoginForm() {
 
       <div className="w-full flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <Input name="email" label="E-mail address" className="w-full" />
+          <Input
+            name="email"
+            label="E-mail address"
+            placeholder="Enter your e-mail address"
+            className="w-full"
+          />
           {state?.errors?.email?.map((error) => (
-            <span key={error} aria-live="polite" className="text-red-500">
+            <span
+              key={error}
+              aria-live="polite"
+              className="text-red-500 text-sm"
+            >
               {error}
             </span>
           ))}
@@ -37,19 +49,22 @@ export function LoginForm() {
             name="password"
             type="password"
             label="Password"
+            placeholder="Enter your password"
             className="w-full"
           />
           {state?.errors?.password?.map((error) => (
-            <span key={error} aria-live="polite" className="text-red-500">
+            <span
+              key={error}
+              aria-live="polite"
+              className="text-red-500 text-sm"
+            >
               {error}
             </span>
           ))}
         </div>
       </div>
       {state?.success === false && <FormError errorMessage={state.message} />}
-      <Button type="submit" className="w-full" color="primary">
-        Sign in
-      </Button>
+      <SubmitButton color="primary" style="w-full" title="Sign in" />
 
       <div className="w-full flex flex-col gap-1 items-center">
         <Link href="./forgot-your-password">

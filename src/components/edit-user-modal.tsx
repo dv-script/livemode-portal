@@ -15,6 +15,7 @@ interface IUser {
     roles: string[];
     createdAt: Date;
     updatedAt: Date;
+    updatedBy: string;
   };
 }
 
@@ -34,6 +35,8 @@ export function EditUserModal({ user }: IUser) {
         onOpenChange={onOpenChange}
         placement="top-center"
         backdrop="blur"
+        size="lg"
+        scrollBehavior="outside"
       >
         <ModalContent>
           {(onClose) => <EditUserForm user={user} onClose={onClose} />}
