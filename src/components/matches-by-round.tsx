@@ -1,4 +1,4 @@
-import { fetchTeamById } from "@/lib/fetcher";
+import { getTeamById } from "@/actions/data/get-team-by-id";
 import { IFetchMatchesResponse } from "@/types/IFetchMatchesResponse";
 import { IFetchTeamResponse } from "@/types/IFetchTeamResponse";
 import { IMatch } from "@/types/IMatch";
@@ -25,7 +25,7 @@ export async function MatchesByRound({ allMatches }: IMatchesByRoundProps) {
   );
 
   const teamsDetails: IFetchTeamResponse[] = await Promise.all(
-    Array.from(teamIds).map(fetchTeamById)
+    Array.from(teamIds).map(getTeamById)
   );
 
   const teamDetailsMap: Record<string, ITeam> = teamsDetails.reduce(

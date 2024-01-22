@@ -1,4 +1,6 @@
-import { fetchTopScorers, fetchPlayerById, fetchTeamById } from "@/lib/fetcher";
+import { getTeamById } from "@/actions/data/get-team-by-id";
+import { getTopScorers } from "@/actions/data/get-top-scorers";
+import { getPlayersById } from "@/actions/data/get-players-by-id";
 import { IFetchPlayerResponse } from "@/types/IFetchPlayerResponse";
 import { IFetchTeamResponse } from "@/types/IFetchTeamResponse";
 import { IFetchTopScorersResponse } from "@/types/IFetchTopScorersResponse";
@@ -6,16 +8,14 @@ import { ITopScorer } from "@/types/ITopScorer";
 import Image from "next/image";
 
 export async function TopScorersTable() {
-  const topScorers = (await fetchTopScorers()) as IFetchTopScorersResponse;
+  const topScorers = (await getTopScorers()) as IFetchTopScorersResponse;
 
   const topScorersWithPlayerData = await Promise.all(
     topScorers.data.map(async (topScorer: ITopScorer) => {
-      const player = (await fetchPlayerById(
+      const player = (await getPlayersById(
         topScorer.idPlayer
       )) as IFetchPlayerResponse;
-      const team = (await fetchTeamById(
-        topScorer.idTeam
-      )) as IFetchTeamResponse;
+      const team = (await getTeamById(topScorer.idTeam)) as IFetchTeamResponse;
       return {
         ...topScorer,
         teamDetails: team.data,
