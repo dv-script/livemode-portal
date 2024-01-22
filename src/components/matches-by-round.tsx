@@ -15,7 +15,10 @@ export function MatchesByRound({
   detailedMatches,
   maxRound,
 }: IMatchesByRoundProps) {
-  const [currentRound, setCurrentRound] = useState(1);
+  const initialRound =
+    detailedMatches.find((match: IMatch) => match.gameTime === "Não Inic.")
+      ?.round || 1;
+  const [currentRound, setCurrentRound] = useState(initialRound);
 
   function handleNextRound() {
     if (maxRound && currentRound < maxRound)
