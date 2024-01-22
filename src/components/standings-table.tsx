@@ -1,9 +1,9 @@
-import { fetchStandings } from "@/lib/fetcher";
+import { getStandings } from "@/actions/data/get-standings";
 import { IFetchStandingsResponse } from "@/types/IFetchStandingsResponse";
 import { IStanding } from "@/types/IStanding";
 
 export async function StandingsTable() {
-  const standings = (await fetchStandings()) as IFetchStandingsResponse;
+  const standings = (await getStandings()) as IFetchStandingsResponse;
   const standingsByGroup: Record<string, IStanding[]> = standings.data.reduce(
     (acc, standings) => {
       acc[standings.groupname] = [
@@ -47,7 +47,10 @@ export async function StandingsTable() {
                 const teamClassified = standing.position <= 2;
 
                 return (
-                  <tr key={standing.id} className="text-center hover:shadow-md duration-100">
+                  <tr
+                    key={standing.id}
+                    className="text-center hover:shadow-md duration-100"
+                  >
                     <td className="border-y-1 px-4 py-2 text-left bg-white sticky left-0">
                       <div className="flex items-center gap-2">
                         {teamClassified ? (
@@ -55,7 +58,9 @@ export async function StandingsTable() {
                             {standing.position}
                           </span>
                         ) : (
-                          <span className="text-sm min-w-3">{standing.position}</span>
+                          <span className="text-sm min-w-3">
+                            {standing.position}
+                          </span>
                         )}
                         <span className="text-sm">{standing.team}</span>
                       </div>
@@ -90,6 +95,24 @@ export async function StandingsTable() {
               })}
             </tbody>
           </table>
+          <div className="flex items-center gap-3 mx-4 text-xs text-zinc-500 lowercase sticky left-4">
+            <div className="flex gap-1 items-center">
+              <span className="inline-block w-2 h-2 bg-blue-500" />
+              <span>Classified</span>
+            </div>
+            <div className="flex gap-1 items-center">
+              <span className="inline-block w-2 h-2 bg-green-600 rounded-full" />
+              <span>Win</span>
+            </div>
+            <div className="flex gap-1 items-center">
+              <span className="inline-block w-2 h-2 bg-zinc-300 rounded-full" />
+              <span>Draw</span>
+            </div>
+            <div className="flex gap-1 items-center">
+              <span className="inline-block w-2 h-2 bg-red-500 rounded-full" />
+              <span>Loss</span>
+            </div>
+          </div>
         </div>
       ))}
     </div>
