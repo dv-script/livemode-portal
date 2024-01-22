@@ -54,7 +54,7 @@ export async function TopScorersTable() {
                   className="border-y-1 flex gap-4 justify-between items-center"
                 >
                   <td className="px-4 py-2">
-                    <div className="flex gap-2 items-center">
+                    <div className="flex gap-2 items-center flex-1">
                       {showPosition ? (
                         <span className="text-2xl text-zinc-500 min-w-6">
                           {topScorer.position}
@@ -64,14 +64,14 @@ export async function TopScorersTable() {
                       )}
                       <Image
                         src={""}
-                        alt={`Image from ${topScorer.player}`}
+                        alt={`${topScorer.player} picture`}
                         width={40}
                         height={40}
                         className="rounded-full"
                       />
                       <Image
                         src={topScorer.teamDetails.urlLogo}
-                        alt={`Logo from ${topScorer.teamDetails.name}`}
+                        alt={`${topScorer.teamDetails.name}'s logo`}
                         width={40}
                         height={40}
                       />
