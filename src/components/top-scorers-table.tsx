@@ -6,20 +6,29 @@ import { IFetchTeamResponse } from "@/types/IFetchTeamResponse";
 import { IFetchTopScorersResponse } from "@/types/IFetchTopScorersResponse";
 import { ITopScorer } from "@/types/ITopScorer";
 import Image from "next/image";
+import { getBlobPlayers } from "@/actions/data/get-blob-players";
 
 export async function TopScorersTable() {
   const topScorers = (await getTopScorers()) as IFetchTopScorersResponse;
 
   const topScorersWithPlayerData = await Promise.all(
     topScorers.data.map(async (topScorer: ITopScorer) => {
-      const player = (await getPlayersById(
-        topScorer.idPlayer
-      )) as IFetchPlayerResponse;
-      const team = (await getTeamById(topScorer.idTeam)) as IFetchTeamResponse;
+      const playerResponse = await getPlayersById(topScorer.idPlayer);
+      const teamResponse = await getTeamById(topScorer.idTeam);
+      const playersBlob = await getBlobPlayers();
+
+      const player = (playerResponse as IFetchPlayerResponse).data;
+      const team = (teamResponse as IFetchTeamResponse).data;
+
+      const playerUrlBlob = playersBlob?.find((player) =>
+        player.url.endsWith(`${topScorer.idPlayer}.png`)
+      )?.url;
+
       return {
         ...topScorer,
-        teamDetails: team.data,
-        playerDetails: player.data,
+        teamDetails: team,
+        playerDetails: player,
+        playerImage: playerUrlBlob,
       };
     })
   );
@@ -62,19 +71,23 @@ export async function TopScorersTable() {
                       ) : (
                         <span className="text-2xl text-zinc-500 min-w-6"></span>
                       )}
-                      <Image
-                        src={""}
-                        alt={`${topScorer.player} picture`}
-                        width={40}
-                        height={40}
-                        className="rounded-full"
-                      />
-                      <Image
-                        src={topScorer.teamDetails.urlLogo}
-                        alt={`${topScorer.teamDetails.name}'s logo`}
-                        width={40}
-                        height={40}
-                      />
+                      <div className="relative flex items-center justify-center overflow-hidden rounded-full bg-zinc-50 min-w-14 min-h-14">
+                        <Image
+                          src={topScorer.playerImage ?? ""}
+                          alt={`${topScorer.player} picture`}
+                          fill
+                          className="bg-cover object-cover"
+                        />
+                      </div>
+                      <div className="relative flex items-center justify-center min-w-12 min-h-12">
+                        <Image
+                          src={topScorer.teamDetails.urlLogo}
+                          alt={`${topScorer.teamDetails.name}'s logo`}
+                          fill
+                          className="bg-cover object-cover"
+                        />
+                      </div>
+
                       <div className="flex flex-col">
                         <span className="">{topScorer.playerDetails.name}</span>
                         <span className="text-sm text-zinc-500">
