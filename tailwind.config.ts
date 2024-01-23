@@ -14,6 +14,9 @@ const config: Config = {
         "275": "2.75",
         "300": "3",
       },
+      objectPosition: {
+        "super-top": "0% -60%",
+      },
     },
   },
   darkMode: "class",
