@@ -78,6 +78,7 @@ export async function TopScorersTable() {
                             src={topScorer.playerImage}
                             alt={`${topScorer.player} picture`}
                             fill
+                            unoptimized
                             className="object-cover object-super-top scale-300 transition duration-300 ease-in-out hover:scale-275"
                           />
                         ) : (
@@ -85,6 +86,7 @@ export async function TopScorersTable() {
                             src={avatarNoImage}
                             alt="No image available"
                             fill
+                            unoptimized
                             className="object-cover"
                           />
                         )}
