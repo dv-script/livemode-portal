@@ -37,8 +37,9 @@ export function MatchCard({ matchesFilteredByRound }: IMatchCardProps) {
                   <Image
                     src={match.homeTeamDetails?.urlLogo || ""}
                     alt={`Logo ${match.homeTeamDetails?.name}`}
-                    width={30}
-                    height={30}
+                    draggable={false}
+                    width={40}
+                    height={40}
                   />
                   <Tooltip
                     content={match.homeTeamDetails?.name}
@@ -72,8 +73,9 @@ export function MatchCard({ matchesFilteredByRound }: IMatchCardProps) {
                   <Image
                     src={match.awayTeamDetails?.urlLogo || ""}
                     alt={`Logo ${match.awayTeamDetails?.name}`}
-                    width={30}
-                    height={30}
+                    draggable={false}
+                    width={40}
+                    height={40}
                   />
                 </div>
               </div>
