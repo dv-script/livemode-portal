@@ -9,6 +9,11 @@ const nextConfig = {
       protocol: 'https',
       hostname: 'frontendapiapp.blob.core.windows.net',
       port: ''
+    },
+    {
+      protocol: 'https',
+      hostname: 'e4q1hopwqwlwbvmx.public.blob.vercel-storage.com',
+      port: ''
     }]
   }
 }
