@@ -78,16 +78,14 @@ export async function TopScorersTable() {
                             src={topScorer.playerImage}
                             alt={`${topScorer.player} picture`}
                             fill
-                            objectPosition="0% -60%"
-                            objectFit="cover"
-                            className="scale-300 transition duration-300 ease-in-out hover:scale-275"
+                            className="object-cover object-super-top scale-300 transition duration-300 ease-in-out hover:scale-275"
                           />
                         ) : (
                           <Image
                             src={avatarNoImage}
-                            alt='No image available'
+                            alt="No image available"
                             fill
-                            objectFit="cover"
+                            className="object-cover"
                           />
                         )}
                       </div>
