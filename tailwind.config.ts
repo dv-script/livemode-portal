@@ -9,7 +9,12 @@ const config: Config = {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      scale: {
+        "275": "2.75",
+        "300": "3",
+      },
+    },
   },
   darkMode: "class",
   plugins: [nextui()],
