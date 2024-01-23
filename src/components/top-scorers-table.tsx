@@ -7,6 +7,7 @@ import { IFetchTopScorersResponse } from "@/types/IFetchTopScorersResponse";
 import { ITopScorer } from "@/types/ITopScorer";
 import Image from "next/image";
 import { getBlobPlayers } from "@/actions/data/get-blob-players";
+import avatarNoImage from "@/assets/avatarNoImage.png";
 
 export async function TopScorersTable() {
   const topScorers = (await getTopScorers()) as IFetchTopScorersResponse;
@@ -69,15 +70,26 @@ export async function TopScorersTable() {
                           {topScorer.position}
                         </span>
                       ) : (
-                        <span className="text-2xl text-zinc-500 min-w-6"></span>
+                        <span className="text-2xl text-zinc-500 min-w-6" />
                       )}
                       <div className="relative flex items-center justify-center overflow-hidden rounded-full bg-zinc-50 min-w-14 min-h-14">
-                        <Image
-                          src={topScorer.playerImage ?? ""}
-                          alt={`${topScorer.player} picture`}
-                          fill
-                          className="bg-cover object-cover"
-                        />
+                        {topScorer.playerImage ? (
+                          <Image
+                            src={topScorer.playerImage}
+                            alt={`${topScorer.player} picture`}
+                            fill
+                            objectPosition="0% -60%"
+                            objectFit="cover"
+                            className="scale-300 transition duration-300 ease-in-out hover:scale-275"
+                          />
+                        ) : (
+                          <Image
+                            src={avatarNoImage}
+                            alt='No image available'
+                            fill
+                            objectFit="cover"
+                          />
+                        )}
                       </div>
                       <div className="relative flex items-center justify-center min-w-12 min-h-12">
                         <Image
