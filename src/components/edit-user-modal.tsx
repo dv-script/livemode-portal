@@ -1,5 +1,5 @@
 "use client";
-import { Modal, ModalContent, useDisclosure } from "@nextui-org/react";
+import { Button, Modal, ModalContent, useDisclosure } from "@nextui-org/react";
 import { PiPencilLine } from "react-icons/pi";
 import { EditUserForm } from "./edit-user-form";
 
@@ -24,12 +24,15 @@ export function EditUserModal({ user }: IUser) {
 
   return (
     <>
-      <button
+      <Button
         onClick={onOpen}
-        className="text-lg text-default-500 cursor-pointer active:opacity-50"
+        isIconOnly
+        size="sm"
+        variant="flat"
+        className="text-lg text-default-500"
       >
         <PiPencilLine />
-      </button>
+      </Button>
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
