@@ -27,12 +27,16 @@ export function DeleteUserModal({
 
   return (
     <>
-      <button
+      <Button
         onClick={onOpen}
-        className="flex align-center text-lg text-default-danger cursor-pointer active:opacity-50"
+        isIconOnly
+        size="sm"
+        color="danger"
+        variant="flat"
+        className="text-lg"
       >
         <TbTrash />
-      </button>
+      </Button>
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
