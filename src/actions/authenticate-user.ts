@@ -1,7 +1,6 @@
 "use server";
 import { signIn } from "@/app/auth/providers";
 import { AuthError } from "next-auth";
-import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const authenticateUserSchema = z.object({
@@ -44,19 +43,19 @@ export async function authenticateUser(prevState: State, formData: FormData) {
     return {
       success: true,
       message: "You have been successfully logged in.",
-    }
+    };
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
-        case 'CredentialsSignin':
+        case "CredentialsSignin":
           return {
             message: "E-mail or password is invalid. Please, try again.",
-            success: false
+            success: false,
           };
-        default: 
+        default:
           return {
             message: "Something went wrong. Please, try again.",
-            success: false
+            success: false,
           };
       }
     }
