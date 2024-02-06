@@ -1,4 +1,4 @@
-import { ChangeYourPasswordForm } from "@/components/change-your-password-form";
+import { ChangeYourPasswordForm } from "@/app/user/edit-profile/change-your-password/_components/change-your-password-form";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

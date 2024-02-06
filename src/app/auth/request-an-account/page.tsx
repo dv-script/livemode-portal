@@ -1,4 +1,4 @@
-import { RequestAnAccountForm } from "@/components/request-an-account-form";
+import { RequestAnAccountForm } from "@/app/auth/request-an-account/_components/request-an-account-form";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

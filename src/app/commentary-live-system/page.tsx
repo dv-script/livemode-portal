@@ -1,12 +1,12 @@
-import { getMatches } from "@/actions/data/get-matches";
+import { getMatches } from "@/data/get-matches";
 import { IFetchMatchesResponse } from "@/types/IFetchMatchesResponse";
-import { MatchesByRound } from "@/components/matches-by-round";
-import { StandingsTable } from "@/components/standings-table";
-import { TopScorersTable } from "@/components/top-scorers-table";
+import { MatchesByRound } from "@/app/commentary-live-system/_components/matches-by-round";
+import { StandingsTable } from "@/app/commentary-live-system/_components/standings-table";
+import { TopScorersTable } from "@/app/commentary-live-system/_components/top-scorers-table";
 import { Metadata } from "next";
 import { IMatch } from "@/types/IMatch";
 import { IFetchTeamResponse } from "@/types/IFetchTeamResponse";
-import { getTeamById } from "@/actions/data/get-team-by-id";
+import { getTeamById } from "@/data/get-team-by-id";
 import { ITeam } from "@/types/ITeam";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Page() {
   const allMatches = (await getMatches()) as IFetchMatchesResponse;
-  const maxRound = allMatches.data.slice(-2)[0].round;
+  const maxRound = allMatches.data.slice(-1)[0].round;
 
   const teamIds = new Set(
     allMatches.data.flatMap((match: IMatch) => [

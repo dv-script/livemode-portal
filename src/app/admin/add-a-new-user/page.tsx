@@ -1,4 +1,4 @@
-import { AddANewUserForm } from "@/components/add-a-new-user-form";
+import { AddANewUserForm } from "@/app/admin/add-a-new-user/_components/add-a-new-user-form";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
