@@ -1,6 +1,6 @@
-import { ScoutsByMatch } from "./IScoutsByMatch";
+import { IScoutsByMatch } from "./IScoutsByMatch";
 
 export interface IFetchScoutsByMatch {
-  data: ScoutsByMatch;
+  data: IScoutsByMatch;
   pagination: null;
 }
