@@ -1,11 +1,11 @@
 "use client";
 import { changeYourPassword } from "@/actions/change-your-password";
-import { Button, Input } from "@nextui-org/react";
+import { Input } from "@nextui-org/react";
 import { useFormState } from "react-dom";
-import { FormError } from "./form-error";
+import { FormError } from "@/components/form-error";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
-import { SubmitButton } from "./submit-button";
+import { SubmitButton } from "@/components/submit-button";
 
 export function ChangeYourPasswordForm() {
   const initialState = { message: "", errors: {} };

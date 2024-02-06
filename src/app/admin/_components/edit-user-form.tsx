@@ -10,11 +10,11 @@ import {
   Select,
   SelectItem,
 } from "@nextui-org/react";
-import { FormError } from "./form-error";
 import { useEffect } from "react";
-import { allRoles } from "@/utils/constants/all-roles";
+import { allRoles } from "@/constants/all-roles";
 import { IUser } from "@/types/IUser";
-import { SubmitButton } from "./submit-button";
+import { FormError } from "@/components/form-error";
+import { SubmitButton } from "@/components/submit-button";
 
 const status = [
   {
@@ -50,7 +50,7 @@ export function EditUserForm({ onClose, user }: EditUserFormProps) {
   }, [onClose, state.success]);
 
   return (
-    <form action={dispatch} >
+    <form action={dispatch}>
       <ModalHeader className="flex flex-col gap-1">Edit User</ModalHeader>
       <ModalBody>
         <Input

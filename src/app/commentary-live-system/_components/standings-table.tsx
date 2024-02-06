@@ -1,4 +1,4 @@
-import { getStandings } from "@/actions/data/get-standings";
+import { getStandings } from "@/data/get-standings";
 import { IFetchStandingsResponse } from "@/types/IFetchStandingsResponse";
 import { IStanding } from "@/types/IStanding";
 

@@ -4,7 +4,7 @@ import { toOrdinal } from "@/utils/toOrdinal";
 import { Button } from "@nextui-org/react";
 import { useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-import { MatchCard } from "./match-card";
+import { MatchCard } from "@/components/match-card";
 
 interface IMatchesByRoundProps {
   detailedMatches: IMatch[];
@@ -40,6 +40,7 @@ export function MatchesByRound({
           onClick={handlePreviousRound}
           disabled={currentRound === 1 && true}
           isIconOnly
+          variant="flat"
           radius="full"
         >
           <FaAngleLeft />
@@ -51,6 +52,7 @@ export function MatchesByRound({
           onClick={handleNextRound}
           disabled={maxRound ? currentRound === maxRound && true : true}
           isIconOnly
+          variant="flat"
           radius="full"
         >
           <FaAngleRight />

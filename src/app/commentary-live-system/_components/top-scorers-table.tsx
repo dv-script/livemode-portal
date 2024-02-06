@@ -1,12 +1,12 @@
-import { getTeamById } from "@/actions/data/get-team-by-id";
-import { getTopScorers } from "@/actions/data/get-top-scorers";
-import { getPlayersById } from "@/actions/data/get-players-by-id";
+import { getTeamById } from "@/data/get-team-by-id";
+import { getTopScorers } from "@/data/get-top-scorers";
+import { getPlayersById } from "@/data/get-players-by-id";
 import { IFetchPlayerResponse } from "@/types/IFetchPlayerResponse";
 import { IFetchTeamResponse } from "@/types/IFetchTeamResponse";
 import { IFetchTopScorersResponse } from "@/types/IFetchTopScorersResponse";
 import { ITopScorer } from "@/types/ITopScorer";
 import Image from "next/image";
-import { getBlobPlayers } from "@/actions/data/get-blob-players";
+import { getBlobPlayers } from "@/data/get-blob-players";
 import avatarNoImage from "@/assets/avatarNoImage.png";
 
 export async function TopScorersTable() {

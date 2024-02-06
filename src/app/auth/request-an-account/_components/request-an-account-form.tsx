@@ -5,8 +5,8 @@ import { useEffect } from "react";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { Checkbox, Input } from "@nextui-org/react";
-import { allRolesWithoutAdmin } from "@/utils/constants/all-roles-without-admin";
-import { SubmitButton } from "./submit-button";
+import { SubmitButton } from "@/components/submit-button";
+import { allRolesWithoutAdmin } from "@/constants/all-roles-without-admin";
 
 export function RequestAnAccountForm() {
   const initialState = { message: "", errors: {} };

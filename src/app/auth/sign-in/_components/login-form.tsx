@@ -1,14 +1,12 @@
 "use client";
 import Link from "next/link";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
 import { authenticateUser } from "@/actions/authenticate-user";
-import { FormError } from "./form-error";
-import { Button, Input } from "@nextui-org/react";
-import { Loading } from "./loading";
-import { SubmitButton } from "./submit-button";
+import { FormError } from "@/components/form-error";
+import { SubmitButton } from "@/components/submit-button";
+import { Input } from "@nextui-org/react";
 
 export function LoginForm() {
-  const { pending } = useFormStatus();
   const initialState = { message: "", errors: {} };
   const [state, dispatch] = useFormState(authenticateUser, initialState);
 
