@@ -1,3 +1,4 @@
+"use server"
 import { list } from "@vercel/blob";
 
 export async function getBlobPlayers() {

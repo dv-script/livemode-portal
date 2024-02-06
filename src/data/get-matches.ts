@@ -1,5 +1,4 @@
-"use server";
-import { matchesURL } from "@/utils/constants/constants-url";
+import { matchesURL } from "@/constants/constants-url";
 import { unstable_noStore } from "next/cache";
 
 export async function getMatches() {

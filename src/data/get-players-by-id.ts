@@ -1,11 +1,10 @@
-"use server";
-import { teamURL } from "@/utils/constants/constants-url";
+import { playersURL } from "@/constants/constants-url";
 import { unstable_noStore } from "next/cache";
 
-export async function getTeamById(id: number) {
+export async function getPlayersById(id: number) {
   unstable_noStore();
   try {
-    const response = await fetch(teamURL.replace(":id", String(id)), {
+    const response = await fetch(playersURL.replace(":id", String(id)), {
       headers: { Authorization: `Bearer ${process.env.FOOTSTATS_TOKEN}` },
     });
     return await response.json();
