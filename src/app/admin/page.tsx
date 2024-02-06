@@ -1,4 +1,4 @@
-import { UsersTable } from "@/components/users-table";
+import { UsersTable } from "@/app/admin/_components/users-table";
 import { Metadata } from "next";
 import { IUser } from "@/types/IUser";
 import { getAllUsers } from "@/actions/get-all-users";
